@@ -1,4 +1,4 @@
-# Frontend  smart invest
+# Frontend  mint easy
 
 ## Project setup
 

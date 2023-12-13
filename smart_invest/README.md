@@ -2,16 +2,6 @@
 
 ## Project setup
 
-#### remark
-the project is built with react and typescript
-in order to install a project from scratch you can you the vitejs tool.
-after installing node js and npm you can run the following command in the terminal
-```bash
-npm init vite@latest
-```
-but in this case we will clone the project from github so no need to run the above command
-
-## start here
 
 
 
@@ -50,6 +40,8 @@ navigate to the project folder to
 install dependencies
 
 ```bash
+npm install
+
 cd smart_invest
 
 npm install
@@ -67,18 +59,7 @@ probably:
 
 http://localhost:5173/
 
-5. run the fake api server.
-navigate to the api folder and run the following commandinstall dependencies
 
-```bash
-cd api
-npm install
-```
-run the api server (if no other api's are avaialble)
-
-```bash
-npm start
-```
 
 -----------------------------------------
 ## Project structure
@@ -95,6 +76,8 @@ contains the components of the project:
 - menu
 - navbar
 - charts
+- login form
+- user form (registration)
 
 and any other component that will be added
 

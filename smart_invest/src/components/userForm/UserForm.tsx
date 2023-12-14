@@ -33,11 +33,21 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     password2: null,
   });
 
+  const [msg, setMsg] = useState<string | null>(null);
+
   const mutation = useMutation({
     mutationFn: async () => {
-     axios.post('http://127.0.0.1:8000/registration/', formData ,{headers: { 'Content-Type': 'application/json' }} )
+     instance.post('/registration/', formData)
      .then((response) => {
         console.log(response);
+        //console.log(response.data.message);
+        if (response.data && response.data.message) {
+    
+          setMsg(response.data.message);
+          console.log(msg);
+        }
+          
+
     },)
     .catch((error) => {
         console.log(error);
@@ -128,6 +138,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               required
             />
             {errors.password2 && <p>{errors.password2}</p>}
+            {msg && <p>{msg}</p>}
           </div>
 
           {/* Submit Button */}

@@ -14,6 +14,7 @@ export const instance: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
+
 export const updateCSRFToken = async (): Promise<void> => {
   try {
     const response: UpdateCSRFTokenResponse = await instance.get<CSRFResponse>('/get-csrf-token/');

@@ -34,9 +34,9 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-     instance.post('/dj-rest-auth/registration/', formData)
+     instance.post('/registration/', formData)
      .then((response) => {
-        console.log(response);
+        console.log("response msg", response.data);
     },)
     .catch((error) => {
         console.log(error);

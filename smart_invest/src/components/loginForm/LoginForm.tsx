@@ -55,11 +55,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         })
         .catch((error) => {
           console.log(error);
-          if (error.response.status === 411) {
-            throw new Error('email not verified');
-          } else {
+          
             setErrors(error.response.data);
-          }
+
         });
     },
     onSuccess: () => {
@@ -134,6 +132,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
  
           <button type="submit">Send</button>
           {error && <p>{error.non_field_errors}</p>}
+          {error && <p>{error.detail}</p>}
 
           
         </form>

@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   useEffect(() => {
     // Fetch CSRF token and set it in cookies
-    axiosInstance.get('/csrf/')
+    axiosInstance.get('/get-csrf-token/')
       .then((response) => {
         const csrfToken = response.data.csrfToken;
         Cookies.set('csrfToken', csrfToken, { expires: 1, path: '/' });

@@ -4,6 +4,7 @@ import './userForm.scss';
 import { instance } from '../../axiosInstance';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type UserFormData = {
   username: string;
@@ -34,9 +35,9 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-     instance.post('/registration/', formData)
+     axios.post('http://127.0.0.1:8000/registration/', formData ,{headers: { 'Content-Type': 'application/json' }} )
      .then((response) => {
-        console.log("response msg", response.data);
+        console.log(response);
     },)
     .catch((error) => {
         console.log(error);

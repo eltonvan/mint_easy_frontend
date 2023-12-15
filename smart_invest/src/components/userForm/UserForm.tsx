@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import './userForm.scss';
-import { instance } from '../../axiosInstance';
+import { instance , updateCSRFToken } from '../../axiosInstance';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -37,8 +37,10 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-     instance.post('/registration/', formData)
-     .then((response) => {
+    updateCSRFToken();
+
+      instance.post('/registration/', formData)
+      .then((response) => {
         console.log(response);
         //console.log(response.data.message);
         if (response.data && response.data.message) {
@@ -46,8 +48,6 @@ const UserForm: React.FC<UserFormProps> = (props) => {
           setMsg(response.data.message);
           console.log(msg);
         }
-          
-
     },)
     .catch((error) => {
         console.log(error);

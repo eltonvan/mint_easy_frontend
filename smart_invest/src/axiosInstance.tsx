@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 
 interface CSRFResponse {
-  csrfToken: string; // Assuming the token is a string
- 
+  csrfToken: string; // CSRF token
 }
 
 interface UpdateCSRFTokenResponse extends AxiosResponse<CSRFResponse> {}
@@ -14,28 +14,17 @@ export const instance: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
-
-
-
 export const updateCSRFToken = async (): Promise<void> => {
-  try {
-    const response: UpdateCSRFTokenResponse = await instance.get<CSRFResponse>('/get-csrf-token/');
-    const newToken: string = response.data.csrfToken;
-    instance.defaults.headers.common['X-CSRFToken'] = newToken;
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Error updating CSRF token:', error.message);
-    } else {
-      console.error('Unknown error occurred while updating CSRF token.');
-    }
-  }
-};
 
-export const fetchResponse = async (url:string, payload:any): Promise<void> => {
-  return instance.post(url, payload) 
-    
-
+      instance.get('/get-csrf-token/')
+      .then((response) => {
+        const csrfToken = response.data.csrfToken;
+        Cookies.set('csrfToken', csrfToken, { expires: 1, path: '/' });
+        console.log('CSRF token updated.');
+      })
+      .catch((error) => {
+        console.error('Error fetching CSRF token:', error);
+      });
 };
 
 export default instance;
-

@@ -28,6 +28,12 @@
             right: 10px;
             cursor: pointer;
         }
+        .closeButton{
+            width: 100%;
+            margin-top: 25px;
+            padding: 10px;
+            cursor: pointer;
+        }
 
         form{
             display: flex;
@@ -54,6 +60,7 @@
                     color: white;
                     background-color: transparent;
                 }
+
             }
             button{
                 width: 100%;

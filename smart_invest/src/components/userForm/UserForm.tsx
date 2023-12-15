@@ -86,7 +86,17 @@ const UserForm: React.FC<UserFormProps> = (props) => {
         <span className="close" onClick={() => props.setOpen(false)}>
           x
         </span>
+        {msg ? (
+        <div className="item">
+          {/* Display the message */}
+          <h4>{msg}</h4>
+          {/* Show button to close form */}
+          <button className="closeButton" onClick={() => props.setOpen(false)}>Close</button>
+        </div>
+      ) : (
+        <React.Fragment>
         <h1>{props.slug}</h1>
+
         <form onSubmit={handleSubmit}>
           {/* Username Input */}
           <div className="item">
@@ -144,6 +154,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
           {/* Submit Button */}
           <button type="submit">Send</button>
         </form>
+        </React.Fragment>
+      )}
       </div>
     </div>
   );

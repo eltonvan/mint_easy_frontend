@@ -1,3 +1,5 @@
+// not in use
+
 import "./product.scss";
 import Single from "../../components/single/Single";
 import { singleProduct } from "../../data";

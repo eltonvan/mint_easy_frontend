@@ -11,20 +11,20 @@ import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import axiosInstance from './axiosInstance';
+
+/*
+the main component of the application
+it renders the navbar, the menu, main section and the footer 
+it also renders the routes based on the url
+*/
 
 
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient() // create a new query client instance from react-query
 
 
 function App() {
-
-
-
-
-const Layout = ({ showMenu }) => {
-    const routes = useRoutes([
+const Layout = ({ showMenu }) => { // Layout component to render the navbar, menu, main section and the footer
+    const routes = useRoutes([ 
       {
         path: '/',
         element: <Home />,
@@ -56,6 +56,7 @@ const Layout = ({ showMenu }) => {
   
     return (
       <div className="main">
+         {/* Wrap the application with the QueryClientProvider */}
         <QueryClientProvider client={queryClient}>
         <Navbar />
         <div className="container">
@@ -78,7 +79,7 @@ const Layout = ({ showMenu }) => {
   };
   
 
-    const router = createBrowserRouter([
+    const router = createBrowserRouter([ // create the router
       {
         path: "/",
         element: <Layout showMenu={false} />,

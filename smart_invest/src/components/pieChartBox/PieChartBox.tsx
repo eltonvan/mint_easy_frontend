@@ -1,3 +1,7 @@
+// not in use
+// placeholder for further customization
+
+
 import "./pieChartBox.scss";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 

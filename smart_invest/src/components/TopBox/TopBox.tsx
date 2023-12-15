@@ -1,3 +1,6 @@
+// not in use
+// placeholder for further customization
+
 import "./topBox.scss";
 import { topDealUsers } from "../../data";
 

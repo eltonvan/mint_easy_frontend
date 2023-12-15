@@ -10,7 +10,7 @@ import axiosInstance from '../../axiosInstance';
 
 
 const Navbar = () => {
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
   const [username, setUsername] = useState(''); // State to store the username
 
@@ -20,34 +20,34 @@ const Navbar = () => {
     setShowLoginForm(true);
     console.log("triggered by openLoginForm", showLoginForm)
   };
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Declare navigate function from react-router-dom
 
   const handleLogout = () => {
     // Perform logout actions
     
-    Cookies.remove('authToken', { path: '/' });
-    console.log("cookie", document.cookie)
+    Cookies.remove('authToken', { path: '/' }); // Remove authToken cookie
+    // console.log("cookie", document.cookie)
 
-    setUsername('');
-    console.log("username", username)
+    setUsername(''); // Reset username state
+    // console.log("username", username)
 
     
-    navigate('/'); 
-    setShowLoginForm(false);
-    console.log("triggered by handleLogout", showLoginForm)
+    navigate('/');  // Navigate to home page
+    setShowLoginForm(false); // Hide the login form
+    // console.log("triggered by handleLogout", showLoginForm)
 
-    setIsLoggedIn(false);
-    console.log("isLoggedIn", isLoggedIn)
+    setIsLoggedIn(false); // Set login status to false
+    // console.log("isLoggedIn", isLoggedIn)
 
     
   };
 
   const handleLogin = (name) => {
     // Perform login actions
-    setIsLoggedIn(true);
-    setUsername(name);
-    setShowLoginForm(false);
-    console.log("triggered by handle login", showLoginForm)
+    setIsLoggedIn(true); // Set login status to true
+    setUsername(name); // Set username state
+    setShowLoginForm(false); // Hide the login form
+    // console.log("triggered by handle login", showLoginForm)
 
   };
 
@@ -55,12 +55,12 @@ const Navbar = () => {
     <div className="navbar">
       <div className="logo">
         <img src="logoSI.svg" alt="" />
-        <span>Smart Invest</span>
+        <span>Mint Easy</span>
       </div>
       <div className="icons">
         <img src="/search.svg" alt="" className="icon" />
-        <img src="/app.svg" alt="" className="icon" />
-        <img src="/expand.svg" alt="" className="icon" />
+        {/* <img src="/app.svg" alt="" className="icon" />
+        <img src="/expand.svg" alt="" className="icon" /> */}
         <div className="notification">
           <img src="/notifications.svg" alt="" />
           <span>1</span>
@@ -84,6 +84,7 @@ const Navbar = () => {
             <span onClick={openLoginForm}> Sign in</span>
           )}
         </div>
+        {/* login form visability condition */}
         {showLoginForm && <LoginForm slug="Sign In" setOpen={setShowLoginForm} handleLogin={handleLogin} />} 
 
         <img src="/settings.svg" alt="" className="icon" />

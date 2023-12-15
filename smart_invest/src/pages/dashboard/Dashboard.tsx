@@ -11,16 +11,20 @@ import { TextBox } from "../../components/textBox/TextBox";
 
 
 const Dashboard = () => {
-    
+    /* grid setup to the dashboard page
+     the dashboard is divided into 9 boxes
+     in each box we render a component
+    the components are imported from the components folder
+    the data is imported from data.ts based on the Variable name in the brackets
+    */
     return (
         <div className="dashboard">
             <div className="box box1">
+        
             <TopBox />
             </div>
-            {/* <div className="box box2"><TextBox title = " Smart Invest" text =  "Invest today and regret it tomorrow"/> </div> */}
 
-
-            <div className="box box3"><ChartBox {...chartBoxUser}/></div>
+            <div className="box box3"><ChartBox {...chartBoxUser}/></div> 
             <div className="box box3"><ChartBox {...chartBoxProduct}/></div>
             <div className="box box4"><PieChartBox/></div>
             <div className="box box5"><ChartBox {...chartBoxConversion}/></div>

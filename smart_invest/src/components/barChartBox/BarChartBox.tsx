@@ -1,3 +1,6 @@
+// not in use
+// placeholder for further customization
+
 import "./barChartBox.scss" 
 import { BarChart, Bar, ResponsiveContainer, Tooltip } from 'recharts';
 import { barChartBoxRevenue,   } from "../../data";

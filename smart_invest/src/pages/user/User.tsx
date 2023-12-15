@@ -1,3 +1,4 @@
+// not in use
 import "./user.scss"
 import Single from "../../components/single/Single"
 import { singleUser } from "../../data"

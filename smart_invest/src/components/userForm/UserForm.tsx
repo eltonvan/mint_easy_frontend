@@ -6,6 +6,17 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+/*
+registration form
+the form is rendered in a modal
+the modal is rendered in from the textbox 
+axios is used to send the data to the backend - django rest framework
+the data is validated in the backend and in the frontend
+the response is sent back to the frontend
+successful response is 200 status code with a msg to verify the email
+
+*/
+// decalre the type of the form data
 type UserFormData = {
   username: string;
   email: string;
@@ -13,11 +24,12 @@ type UserFormData = {
   password2: string;
 };
 
+// declare the type of the props
 type UserFormProps = {
   slug: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
+// set the initial state of the form data
 const UserForm: React.FC<UserFormProps> = (props) => {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState<UserFormData>({
@@ -26,6 +38,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     password1: '',
     password2: '',
   });
+
+  // set the initial state of the errors
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({
     username: null,
     email: null,
@@ -33,47 +47,51 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     password2: null,
   });
 
-  const [msg, setMsg] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null); // set the initial state of the message
 
   const mutation = useMutation({
     mutationFn: async () => {
-    updateCSRFToken();
+    updateCSRFToken(); // update the csrf token using function from axiosInstance.ts
 
-      instance.post('/registration/', formData)
+      instance.post('/registration/', formData) // send the data to the backend
       .then((response) => {
-        console.log(response);
-        //console.log(response.data.message);
+        //console.log(response);
         if (response.data && response.data.message) {
     
-          setMsg(response.data.message);
-          console.log(msg);
+          setMsg(response.data.message); // set the message
+          // console.log(msg);
         }
     },)
-    .catch((error) => {
-        console.log(error);
-        setErrors(error.response.data);
+    .catch((error) => { // catch any errors
+        // console.log(error);
+        setErrors(error.response.data); // set the errors
     });
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries([`all${props.slug}s`]);
+      queryClient.invalidateQueries([`all${props.slug}s`]); // invalidate the query preparing it for a refetch
     },
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (formData.password1 !== formData.password2) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { // e stands for event
+    e.preventDefault(); // prevent the default behaviour of the form like page refresh or redirect
+    
+    if (formData.password1 !== formData.password2) { // local validation
       return alert("Passwords don't match!");
     }
-
+    
     try {
-      await mutation.mutateAsync();
+      await mutation.mutateAsync();  // execution is paused until the promise is resolved
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
+  // handle the input change
+  // update the form data and the errors
+  // the errors are set to null when the user starts typing
+  // this way the user can see the errors only after they have tried to submit the form
+  // this is done to avoid showing errors when the user is typing
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     setFormData({ ...formData, [field]: e.target.value });
 
@@ -86,7 +104,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
         <span className="close" onClick={() => props.setOpen(false)}>
           x
         </span>
-        {msg ? (
+        {/* If there is a message display it otherwise display the form */}
+        {msg ? (  
         <div className="item">
           {/* Display the message */}
           <h4>{msg}</h4>
@@ -94,7 +113,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
           <button className="closeButton" onClick={() => props.setOpen(false)}>Close</button>
         </div>
       ) : (
-        <React.Fragment>
+        <React.Fragment> {/* React.Fragment is used to avoid using a div */}
+        {/* Display the form */}
         <h1>{props.slug}</h1>
 
         <form onSubmit={handleSubmit}>
@@ -108,6 +128,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               onChange={(e) => handleInputChange(e, 'username')}
               required
             />
+          
+          {/* display relevant errors in the right place*/}
             {errors.username && <p>{errors.username}</p>}
           </div>
 
@@ -134,6 +156,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               onChange={(e) => handleInputChange(e, 'password1')}
               required
             />
+            {/* display relevant errors in the right place*/}
             {errors.password1 && <p>{errors.password1}</p>}
           </div>
 
@@ -147,6 +170,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               onChange={(e) => handleInputChange(e, 'password2')}
               required
             />
+            {/* display relevant errors in the right place*/}
             {errors.password2 && <p>{errors.password2}</p>}
             {msg && <p>{msg}</p>}
           </div>

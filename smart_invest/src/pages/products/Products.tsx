@@ -1,3 +1,6 @@
+// not in use
+
+
 import { useState } from "react";
 import "./products.scss";
 import DataTable from "../../components/dataTable/DataTable";

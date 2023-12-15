@@ -6,17 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
 
+// declare the type of the form data
 
 type LoginFormData = {
   username: string;
   password: string;
 };
 
+// declare the type of the props
 type LoginFormProps = {
   slug: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleLogin: (username: string) => void;
 };
+
+// set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
   const queryClient = useQueryClient();
@@ -24,8 +28,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     username: '',
     password: '',
   });
-  const navigate = useNavigate();
-  const [error, setErrors] = useState<string | null>(null);
+  const navigate = useNavigate(); // Declare navigate function from react-router-dom
+  const [error, setErrors] = useState<string | null>(null); // State to store error message
 
   useEffect(() => {
     // Fetch CSRF token and set it in cookies
@@ -46,10 +50,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           console.log(response);
           const responseData = response.data;
           console.log("test");
-          if (responseData.key) {
-            Cookies.set('authToken', responseData.key, { expires: 1, path: '/' });
-            props.handleLogin(formData.username);
-            navigate('/dashboard');
+          if (responseData.key) { // If a key is returned, login was successful
+            Cookies.set('authToken', responseData.key, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
+            props.handleLogin(formData.username); // Call handleLogin function from props
+            navigate('/dashboard'); // redirection to dashboard page
           }
           return response;
         })
@@ -61,29 +65,30 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([`all${props.slug}s`]);
+      queryClient.invalidateQueries([`all${props.slug}s`]); // Invalidate cache for all users preparing it for a refetch
     },
   });
   
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
     try {
-      await mutation.mutateAsync();
+      await mutation.mutateAsync(); // Execute the mutation and wait for it to finish
+
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message);
+        setError(error.message); // Set error message
       }
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    setFormData({ ...formData, [field]: e.target.value });
+    setFormData({ ...formData, [field]: e.target.value }); // Update form data
   };
 
   const setFormOpen = (open: boolean) => {
-    props.setOpen(open);
+    props.setOpen(open); // Set the open state of the form
   };
 
 
@@ -92,7 +97,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
     <div className="loginForm">
       <div className="modal">
-        <span className="close" onClick={() => props.setOpen(false)}>
+        <span className="close" onClick={() => props.setOpen(false)}> {/* close the form */}
           x
         </span>
         <h1>{props.slug}</h1>
@@ -131,6 +136,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             </div> */}
  
           <button type="submit">Send</button>
+          {/* display errors*/}
           {error && <p>{error.non_field_errors}</p>}
           {error && <p>{error.detail}</p>}
 

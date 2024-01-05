@@ -45,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   const mutation = useMutation({
     mutationFn: () => {
-      return instance.post('/dj-rest-auth/login_the_right/', formData)
+      return instance.post('/dj-rest-auth/login/', formData)
         .then((response) => {
           console.log(response);
           const responseData = response.data;

@@ -5,12 +5,14 @@ import Users from "./pages/users/Users";
 import Products from "./pages/products/Products";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import PassResetForm from "./components/passResetForm/PassResetForm";
 import Menu from "./components/menu/Menu";
 import Login from "./pages/login/Login";
 import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import FormPage from "./pages/formPage/FormPage";
 
 /*
 the main component of the application
@@ -107,6 +109,10 @@ const Layout = ({ showMenu }) => { // Layout component to render the navbar, men
           {
             path: "/products/:id",
             element: <Product />,
+          },
+          {
+            path:"/reset-password/:uid/:token",
+            element: <FormPage/>
           },
         ],
       },

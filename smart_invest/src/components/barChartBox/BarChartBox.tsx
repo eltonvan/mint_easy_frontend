@@ -3,7 +3,6 @@
 
 import "./barChartBox.scss" 
 import { BarChart, Bar, ResponsiveContainer, Tooltip } from 'recharts';
-import { barChartBoxRevenue,   } from "../../data";
 
 type Props ={
 

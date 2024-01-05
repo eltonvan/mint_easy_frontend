@@ -1,10 +1,9 @@
 import "./navbar.scss";
 import { useState, useEffect } from 'react';
 import LoginForm from "../loginForm/LoginForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
+//import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import axiosInstance from '../../axiosInstance';
 
 
 

@@ -1,7 +1,6 @@
 // not in use
 // placeholder for further customization
 
-import React from "react";
 import { Link } from "react-router-dom";
 import "./chartBox.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import './userForm.scss';
 import { instance , updateCSRFToken } from '../../axiosInstance';
 // import Cookies from 'js-cookie';
@@ -31,7 +31,7 @@ type UserFormProps = {
 };
 // set the initial state of the form data
 const UserForm: React.FC<UserFormProps> = (props) => {
-  const queryClient = useQueryClient();
+//  const queryClient = useQueryClient();
   const [formData, setFormData] = useState<UserFormData>({
     username: '',
     email: '',
@@ -69,7 +69,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries([`all${props.slug}s`]); // invalidate the query preparing it for a refetch
+     // queryClient.invalidateQueries([`all${props.slug}s`]); // invalidate the query preparing it for a refetch
     },
   });
 

@@ -11,17 +11,15 @@ which do nor require login
 const formPage = () => {
 
     const [open, setOpen] = useState(false);
-
-
-    
+   
     return (
         <div className="home">
-
             <div className="passResetForm">
-                <PassResetForm  setOpen={setOpen}/>
+                <PassResetForm setOpen={setOpen} open={open} />
+            </div>
+            {/* Other components or content */}
         </div>
-            </div>  
-    )
-}
+    );
+};
 
 export default formPage;

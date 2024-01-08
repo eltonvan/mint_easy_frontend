@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import './loginForm.scss';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -23,13 +23,13 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({
     username: '',
     password: '',
   });
   const navigate = useNavigate(); // Declare navigate function from react-router-dom
-  const [error, setErrors] = useState<string | null>(null); // State to store error message
+  const [error, setErrors] = useState<any>(null); // State to store error message
 
   useEffect(() => {
     // Fetch CSRF token and set it in cookies
@@ -65,7 +65,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([`all${props.slug}s`]); // Invalidate cache for all users preparing it for a refetch
+//      queryClient.invalidateQueries([`all${props.slug}s`]); // Invalidate cache for all users preparing it for a refetch
     },
   });
   
@@ -78,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message); // Set error message
+        setErrors(error.message); // Set error message
       }
     }
   };
@@ -87,9 +87,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     setFormData({ ...formData, [field]: e.target.value }); // Update form data
   };
 
-  const setFormOpen = (open: boolean) => {
-    props.setOpen(open); // Set the open state of the form
-  };
+  // const setFormOpen = (open: boolean) => {
+  //   props.setOpen(open); // Set the open state of the form
+  // };
 
 
   return (

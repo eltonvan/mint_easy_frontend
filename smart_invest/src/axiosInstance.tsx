@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 
 /*
@@ -7,11 +7,11 @@ fetching the CSRF token from the backend and storing it in a cookie
 attaching a CSRF token to all the requests
 */
 
-interface CSRFResponse { // Defines the structure of the response expected when fetching the CSRF token
-  csrfToken: string; // string data type
-}
+// interface CSRFResponse { // Defines the structure of the response expected when fetching the CSRF token
+//   csrfToken: string; // string data type
+// }
 
-interface UpdateCSRFTokenResponse extends AxiosResponse<CSRFResponse> {}
+// interface UpdateCSRFTokenResponse extends AxiosResponse<CSRFResponse> {}
 
 export const instance: AxiosInstance = axios.create({ 
   baseURL: 'http://127.0.0.1:8000', // Base URL of the backend

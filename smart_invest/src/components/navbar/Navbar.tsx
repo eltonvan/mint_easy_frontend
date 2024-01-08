@@ -1,5 +1,5 @@
 import "./navbar.scss";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LoginForm from "../loginForm/LoginForm";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +41,7 @@ const Navbar = () => {
     
   };
 
-  const handleLogin = (name) => {
+  const handleLogin = (name: string) => {
     // Perform login actions
     setIsLoggedIn(true); // Set login status to true
     setUsername(name); // Set username state

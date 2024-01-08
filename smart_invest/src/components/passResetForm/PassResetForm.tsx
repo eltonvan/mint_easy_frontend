@@ -1,6 +1,6 @@
 import "./passResetForm.scss"
 import React, { useState} from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { instance } from '../../axiosInstance';
 import { useParams } from "react-router-dom";
  
@@ -20,21 +20,22 @@ type PassResetFormData = {
 // declare the type of the props
 type PassResetFormProps = {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    open?: boolean; 
 
 };
 
 // set the initial state of the form data
 
 const PassResetForm: React.FC<PassResetFormProps> = (props) => {
-    const queryClient = useQueryClient();
+    //const queryClient = useQueryClient();
     
-    const { uid, token } = useParams(); // Get the uid and token from the URL
+    const { uid = '', token = '' } = useParams<{ uid: string; token: string }>() || {}; // Destructure and set default empty strings
     console.log(uid, token);
     const [formData, setFormData] = useState<PassResetFormData>({
         new_password1: '',
         new_password2: '',
-        uid: uid,
-        token: token,
+        uid: uid || '',
+        token: token || '',
 
     });
 
@@ -86,6 +87,9 @@ const mutation = useMutation({
 
     return (
 
+        <div className={props.open ? "passResetForm open" : "passResetForm"}>
+
+
         <div className="passResetForm">
             {successful && (
                 <div style={{ backgroundColor: 'green', color: 'white', padding: '10px', marginTop: '10px' }} >
@@ -107,7 +111,7 @@ const mutation = useMutation({
                 <div className="item">
                 <label htmlFor="new_password1">Password</label>
                 <input
-                    type="new_password"
+                    type="password"
                     name="new_password1"
                     id="new_password1"
                     value={formData.new_password1}
@@ -120,7 +124,7 @@ const mutation = useMutation({
                 <div className="item">
                 <label htmlFor="password2">Confirm Password</label>
                 <input
-                    type="new_password"
+                    type="password"
                     name="new_password2"
                     id="new_password2"
                     value={formData.new_password2}
@@ -134,6 +138,7 @@ const mutation = useMutation({
             </form>
             
 
+        </div>
         </div>
         </div>
     );

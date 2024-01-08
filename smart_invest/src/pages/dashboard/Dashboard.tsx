@@ -1,4 +1,3 @@
-import React from "react";
 import TopBox from "../../components/TopBox/TopBox";
 import "./dashboard.scss";
 import ChartBox from "../../components/chartBox/ChartBox";

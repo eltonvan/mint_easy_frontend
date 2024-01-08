@@ -113,6 +113,10 @@ const Layout = ({ showMenu }) => { // Layout component to render the navbar, men
             path:"/reset-password/:uid/:token",
             element: <FormPage/>
           },
+          {
+            path:"/confirm-email/:key",
+            element: <FormPage/>,
+          }
         ],
       },
       {

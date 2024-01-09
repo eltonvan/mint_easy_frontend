@@ -1,19 +1,26 @@
 import "./navbar.scss";
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import LoginForm from "../loginForm/LoginForm";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { useNavbarContext } from "../../contexts/NavbarContext";
 
 
 
 
 const Navbar = () => {
-  const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
-  const [username, setUsername] = useState(''); // State to store the username
+  // const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+  // const [username, setUsername] = useState(''); // State to store the username
+  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername } = useNavbarContext();
 
+ 
+  console.log("navbar islogged in", isLoggedIn)
+  console.log("navbar username", username)
+  console.log("showLoginForm in navbar", showLoginForm)
 
+  
 
   const openLoginForm = () => {
     setShowLoginForm(true);
@@ -46,7 +53,10 @@ const Navbar = () => {
     setIsLoggedIn(true); // Set login status to true
     setUsername(name); // Set username state
     setShowLoginForm(false); // Hide the login form
-    // console.log("triggered by handle login", showLoginForm)
+    console.log("triggered by handle login", showLoginForm)
+    console.log("isLoggedIn in navbar", isLoggedIn)
+    console.log("username in navbar", username)
+    console.log("showLoginForm in navbar", showLoginForm)
 
   };
 

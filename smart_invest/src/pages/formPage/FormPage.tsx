@@ -3,11 +3,16 @@ import { useLocation } from "react-router-dom";
 import "./formPage.scss";
 import PassResetForm from "../../components/passResetForm/PassResetForm";
 import { instance } from '../../axiosInstance';
+import LoginForm from "../../components/loginForm/LoginForm";
+import { useNavbarContext } from "../../contexts/NavbarContext";
 
 const FormPage = () => {
     const [open, setOpen] = useState(false);
     //const history = useHistory();
     const location = useLocation();
+    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername } = useNavbarContext();
+
+
 
     useEffect(() => {
         // Extracting params from the URL
@@ -32,22 +37,29 @@ const FormPage = () => {
 
             // Redirect to the endpoint with the extracted key
         
-            // window.location.href = `http://127.0.0.1:8000/registration/account-confirm-email/${key}/`;
-            instance.post('/registration/account-confirm-email/', {key:key})
+            instance.post(`/registration/account-confirm-email/${key}/`, {key:key})
             .then((response) => {
-                console.log(response);
-                const responseData = response.data;
-                console.log(responseData);
-                if (responseData.key) { // If a key is returned, login was successful
-                    console.log("test");
-                    // Cookies.set('authToken', responseData.key, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
-                    // props.handleLogin(formData.username); // Call handleLogin function from props
-                    // navigate('/dashboard'); // redirection to dashboard page
-                }
+                console.log("response: ", response);
+
+                // Set the state of the component to show the login form
+
+            if (response.status === 200) {
+                setShowLoginForm(true);
+                setIsLoggedIn(false);
+                setUsername(''); 
+            }
+
+
+
+
                 return response;
             })
+            .catch((error) => {
+                console.log("error: ", error);
+                console.log(error);
+            });
         }
-    }, [location.pathname]);
+    }, [location.pathname, setShowLoginForm, setIsLoggedIn, setUsername, open]); 
 
     return (
         <div className="home">
@@ -56,6 +68,8 @@ const FormPage = () => {
                     <PassResetForm setOpen={setOpen} />
                 </div>
             )}
+        {showLoginForm && <LoginForm slug="Password verified, you can log in now" setOpen={setShowLoginForm} handleLogin={(setUsername) => {}} />}
+
         </div>
     );
 };

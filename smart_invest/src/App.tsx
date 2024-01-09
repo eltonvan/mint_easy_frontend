@@ -10,6 +10,7 @@ import "./styles/global.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
+import { NavbarProvider } from "./contexts/NavbarContext";
 
 /*
 the main component of the application
@@ -49,7 +50,9 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
     <div className="main">
       {/* Wrap the application with the QueryClientProvider */}
       <QueryClientProvider client={queryClient}>
+      <NavbarProvider>
         <Navbar />
+        
         <div className="container">
           {renderMenu}
           <div className="contentContainer">
@@ -57,6 +60,7 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
           </div>
         </div>
         <Footer />
+        </NavbarProvider>
       </QueryClientProvider>
     </div>
   );
@@ -77,6 +81,10 @@ const router = createBrowserRouter([ // create the router
       },
       {
         path:"/reset-password/:uid/:token",
+        element: <FormPage/>
+      },
+      {
+        path:"/confirm-email/:key",
         element: <FormPage/>
       },
     ],

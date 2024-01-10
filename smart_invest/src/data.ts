@@ -12,35 +12,49 @@ export const menu = [
         
         {
           id: 2,
-          title: "Trading",
+          title: "Dashboard",
           url: "/dashboard",
           icon: "user.svg",
         },
         {
           id: 3,
-          title: "Porfolio",
-          url: "/dashboard",
+          title: "Trading",
+          url: "/trading",
           icon: "post2.svg",
         },
 
         {
           id: 4,
-          title: "about us",
-          url: "/",
-          icon: "calendar.svg",
+          title: "Invest",
+          url: "/invest",
+          icon: "order.svg",
         },
+
         {
           id: 5,
-          title: "Contact",
-          url: "/users",
-          icon: "apartment3.svg",
+          title: "Watchlist",
+          url: "/watchlist",
+          icon: "post.svg",
         },
 
         {
           id: 6,
+          title: "about us",
+          url: "/about",
+          icon: "profile.svg",
+        },
+        {
+          id: 7,
+          title: "Contact",
+          url: "/contact",
+          icon: "log.svg",
+        },
+
+        {
+          id: 8,
           title: "Invest now!",
-          url: "/users",
-          icon: "apartment3.svg",
+          url: "/",
+          icon: "note.svg",
         },
       ],
     },

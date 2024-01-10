@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
+import { useNavbarContext } from "../../contexts/NavbarContext";
+
+
 
 // declare the type of the form data
 
@@ -23,6 +26,8 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
+  const {msg, setMsg } = useNavbarContext();
+
   // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({
     username: '',
@@ -72,6 +77,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission
+    setMsg(''); // Reset msg
 
     try {
       await mutation.mutateAsync(); // Execute the mutation and wait for it to finish
@@ -97,6 +103,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
     <div className="loginForm">
       <div className="modal">
+      {msg && <div className="msg">{msg}</div>}
+
         <span className="close" onClick={() => props.setOpen(false)}> {/* close the form */}
           x
         </span>
@@ -124,16 +132,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             />
             
           </div>
-            {/* <div className="item">
-                <label>Email</label>
-                <input
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) => handleInputChange(e, 'email')}
-                required
-                />
-            </div> */}
  
           <button type="submit">Send</button>
           {/* display errors*/}

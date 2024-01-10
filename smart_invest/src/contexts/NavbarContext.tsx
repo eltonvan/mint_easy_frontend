@@ -7,6 +7,8 @@ interface NavbarContextProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   username: string;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
+  msg: string;
+  setMsg: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const NavbarContext = createContext<NavbarContextProps | undefined>(undefined);
@@ -27,6 +29,7 @@ export const NavbarProvider: React.FC<NavbarProviderProps> = ({ children }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const [msg, setMsg] = useState('');
 
   console.log("username (context): ", username);
   console.log("isLoggedIn (context): ", isLoggedIn);
@@ -35,7 +38,7 @@ export const NavbarProvider: React.FC<NavbarProviderProps> = ({ children }) => {
 
 
   return (
-    <NavbarContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername }}>
+    <NavbarContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg }}>
       {children}
     </NavbarContext.Provider>
   );

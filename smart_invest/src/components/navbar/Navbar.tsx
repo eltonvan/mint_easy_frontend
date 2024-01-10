@@ -13,7 +13,7 @@ const Navbar = () => {
   // const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
   // const [username, setUsername] = useState(''); // State to store the username
-  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername } = useNavbarContext();
+  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useNavbarContext();
 
  
   console.log("navbar islogged in", isLoggedIn)
@@ -46,6 +46,8 @@ const Navbar = () => {
     // console.log("isLoggedIn", isLoggedIn)
 
     
+
+    
   };
 
   const handleLogin = (name: string) => {
@@ -62,6 +64,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
+      {msg && <div className="msg">{msg}</div>}
       <div className="logo">
         <img src="logoSI.svg" alt="" />
         <span>Mint Easy</span>

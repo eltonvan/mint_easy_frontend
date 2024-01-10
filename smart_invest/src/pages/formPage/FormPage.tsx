@@ -5,12 +5,13 @@ import PassResetForm from "../../components/passResetForm/PassResetForm";
 import { instance } from '../../axiosInstance';
 import LoginForm from "../../components/loginForm/LoginForm";
 import { useNavbarContext } from "../../contexts/NavbarContext";
-
+import { useNavigate } from "react-router-dom";
 const FormPage = () => {
     const [open, setOpen] = useState(false);
     //const history = useHistory();
     const location = useLocation();
-    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername } = useNavbarContext();
+    const navigate = useNavigate();
+    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useNavbarContext();
 
 
 
@@ -44,9 +45,11 @@ const FormPage = () => {
                 // Set the state of the component to show the login form
 
             if (response.status === 200) {
+                navigate('/');
                 setShowLoginForm(true);
                 setIsLoggedIn(false);
                 setUsername(''); 
+                setMsg('Email confirmed, you can log in now');
             }
 
 
@@ -68,7 +71,7 @@ const FormPage = () => {
                     <PassResetForm setOpen={setOpen} />
                 </div>
             )}
-        {showLoginForm && <LoginForm slug="Password verified, you can log in now" setOpen={setShowLoginForm} handleLogin={(setUsername) => {}} />}
+        {showLoginForm && <LoginForm slug="Password verified, you can log in now" setOpen={setShowLoginForm} handleLogin={() => {}} />}
 
         </div>
     );

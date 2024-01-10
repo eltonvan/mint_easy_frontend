@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
 import { NavbarProvider } from "./contexts/NavbarContext";
 
+
 /*
 the main component of the application
 it renders the navbar, the menu, main section and the footer 

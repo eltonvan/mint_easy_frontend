@@ -32,6 +32,8 @@ const Navbar = () => {
     // Perform logout actions
     
     Cookies.remove('authToken', { path: '/' }); // Remove authToken cookie
+    Cookies.remove('username', { path: '/' }); // Remove username cookie
+    Cookies.remove('csrftoken', { path: '/' }); // Remove csrftoken cookie
     // console.log("cookie", document.cookie)
 
     setUsername(''); // Reset username state

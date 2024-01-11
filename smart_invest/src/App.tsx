@@ -18,7 +18,6 @@ import Cookies from 'js-cookie';
 
 
 
-
 /*
 the main component of the application
 it renders the navbar, the menu, main section and the footer 
@@ -57,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
     <div className="main">
       {/* Wrap the application with the QueryClientProvider */}
       <QueryClientProvider client={queryClient}>
-      <NavbarProvider>
+      
         <Navbar />
         
         <div className="container">
@@ -67,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
           </div>
         </div>
         <Footer />
-        </NavbarProvider>
+        
       </QueryClientProvider>
     </div>
   );
@@ -121,9 +120,10 @@ const router = createBrowserRouter([ // create the router
 ]);
 
 function App() {
-  return 
-  
-  <RouterProvider router={router} />;
+  return (
+  <NavbarProvider>
+    <RouterProvider router={router} />
+    </NavbarProvider>);
 }
 
 export default App;

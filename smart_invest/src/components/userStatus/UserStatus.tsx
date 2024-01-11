@@ -1,10 +1,10 @@
 import userStatus from './UserStatus.scss'
 
 
-export const UserStatus = () => {
+const UserStatus = () => {
   return (
     <div><h1>UserStatus</h1></div>
-    
+
   )
 }
 

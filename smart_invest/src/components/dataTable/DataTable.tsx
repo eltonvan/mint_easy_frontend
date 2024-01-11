@@ -1,6 +1,4 @@
-// not in use
-// placeholder for further customization
-
+ 
 import {
   DataGrid,
   GridColDef,
@@ -20,16 +18,16 @@ const DataTable = (props: Props) => {
 
 
 //  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (id: number) => {
-      return fetch(`http://localhost:8800/api/${props.slug}/${id}`, {
-        method: "delete",
-      });
-    },
-    onSuccess: ()=>{
-    //  queryClient.invalidateQueries([`all${props.slug}`]);
-    }
-  });
+  // const mutation = useMutation({
+  //   mutationFn: (id: number) => {
+  //     return fetch(`http://localhost:8800/api/${props.slug}/${id}`, {
+  //       method: "delete",
+  //     });
+  //   },
+  //   onSuccess: ()=>{
+  //   //  queryClient.invalidateQueries([`all${props.slug}`]);
+  //   }
+  // });
 
   const handleDelete = (id: number) => {
     //delete the item
@@ -51,7 +49,7 @@ const DataTable = (props: Props) => {
           </div>
         </div>
       );
-    },
+    }, 
   };
 
   return (

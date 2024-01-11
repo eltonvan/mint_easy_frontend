@@ -1,5 +1,6 @@
 import Home from "./pages/home/Home";
 import Dashboard from "./pages/dashboard/Dashboard";
+import { WatchList } from "./pages/watchList/WatchList";
 import { createBrowserRouter, RouterProvider, Outlet, useRoutes } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
@@ -88,6 +89,10 @@ const router = createBrowserRouter([ // create the router
       {
         path: "/invest",
         element: <Dashboard />,
+      },
+      {
+        path: "/watchlist",
+        element: <WatchList />,
       },
       {
         path: "/about",

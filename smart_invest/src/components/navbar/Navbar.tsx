@@ -55,10 +55,7 @@ const Navbar = () => {
     setIsLoggedIn(true); // Set login status to true
     setUsername(name); // Set username state
     setShowLoginForm(false); // Hide the login form
-    console.log("triggered by handle login", showLoginForm)
-    console.log("isLoggedIn in navbar", isLoggedIn)
-    console.log("username in navbar", username)
-    console.log("showLoginForm in navbar", showLoginForm)
+
 
   };
 

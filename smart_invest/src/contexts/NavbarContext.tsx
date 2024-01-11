@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 interface NavbarContextProps {
   showLoginForm: boolean;
@@ -31,9 +32,15 @@ export const NavbarProvider: React.FC<NavbarProviderProps> = ({ children }) => {
   const [username, setUsername] = useState('');
   const [msg, setMsg] = useState('');
 
-  console.log("username (context): ", username);
-  console.log("isLoggedIn (context): ", isLoggedIn);
-  console.log("showLoginForm (context): ", showLoginForm);
+  useEffect(()=> {
+    const authToken = Cookies.get('authToken'); // Get authToken from cookie
+    const user = Cookies.get('username'); // Get username from cookie
+    if (authToken) {
+      setIsLoggedIn(true); // Set login status to true if authToken exists
+      setUsername(user || 'no user cookie'); // Set username state
+    }
+  }
+  , []);
 
 
 

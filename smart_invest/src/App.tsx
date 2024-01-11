@@ -18,6 +18,7 @@ import Cookies from 'js-cookie';
 
 
 
+
 /*
 the main component of the application
 it renders the navbar, the menu, main section and the footer 
@@ -120,7 +121,9 @@ const router = createBrowserRouter([ // create the router
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return 
+  
+  <RouterProvider router={router} />;
 }
 
 export default App;

@@ -13,6 +13,9 @@ import "./styles/global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
 import { NavbarProvider } from "./contexts/NavbarContext";
+import Cookies from 'js-cookie';
+
+
 
 
 /*

@@ -4,14 +4,14 @@ import "./formPage.scss";
 import PassResetForm from "../../components/passResetForm/PassResetForm";
 import { instance } from '../../axiosInstance';
 import LoginForm from "../../components/loginForm/LoginForm";
-import { useNavbarContext } from "../../contexts/NavbarContext";
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
 import { useNavigate } from "react-router-dom";
 const FormPage = () => {
     const [open, setOpen] = useState(false);
     //const history = useHistory();
     const location = useLocation();
     const navigate = useNavigate();
-    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useNavbarContext();
+    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useAuthStateContext();
 
 
 

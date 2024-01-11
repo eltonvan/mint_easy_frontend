@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
-import { useNavbarContext } from "../../contexts/NavbarContext";
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
 
 
 
@@ -26,7 +26,7 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const {msg, setMsg } = useNavbarContext();
+  const {msg, setMsg } = useAuthStateContext();
 
   // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({

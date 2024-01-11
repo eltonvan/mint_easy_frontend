@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-interface NavbarContextProps {
+interface AuthStateContextProps {
   showLoginForm: boolean;
   setShowLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
@@ -12,21 +12,21 @@ interface NavbarContextProps {
   setMsg: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NavbarContext = createContext<NavbarContextProps | undefined>(undefined);
+const AuthStateContext = createContext<AuthStateContextProps | undefined>(undefined);
 
-export const useNavbarContext = (): NavbarContextProps => {
-  const context = useContext(NavbarContext);
+export const useAuthStateContext = (): AuthStateContextProps => {
+  const context = useContext(AuthStateContext);
   if (!context) {
-    throw new Error('useNavbarContext must be used within a NavbarProvider');
+    throw new Error('useAuthStateContext must be used within a NavbarProvider');
   }
   return context;
 };
 
-interface NavbarProviderProps {
+interface AuthStateProviderProps {
   children: ReactNode;
 }
 
-export const NavbarProvider: React.FC<NavbarProviderProps> = ({ children }) => {
+export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -45,8 +45,8 @@ export const NavbarProvider: React.FC<NavbarProviderProps> = ({ children }) => {
 
 
   return (
-    <NavbarContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg }}>
+    <AuthStateContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg }}>
       {children}
-    </NavbarContext.Provider>
+    </AuthStateContext.Provider>
   );
 };

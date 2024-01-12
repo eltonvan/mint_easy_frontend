@@ -1,11 +1,6 @@
-// import React from "react";
-// import TopBox from "../../components/TopBox/TopBox";
+
 import "./home.scss";
-// import ChartBox from "../../components/chartBox/ChartBox";
-// import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue } from "../../data";
-// import BarChartBox from "../../components/barChartBox/BarChartBox";
-// import PieChartBox from "../../components/pieChartBox/PieChartBox";
-// import BigChartBox from "../../components/bigChartBox/BigChartBox";
+
 import TextBox from "../../components/textBox/TextBox";
 
 /*

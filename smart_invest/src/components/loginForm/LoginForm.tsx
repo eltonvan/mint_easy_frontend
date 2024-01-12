@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
+
+
 
 // declare the type of the form data
 
@@ -23,6 +26,8 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
+  const {msg, setMsg } = useAuthStateContext();
+
   // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({
     username: '',
@@ -52,6 +57,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           console.log("test");
           if (responseData.key) { // If a key is returned, login was successful
             Cookies.set('authToken', responseData.key, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
+            Cookies.set('username', formData.username, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day
             props.handleLogin(formData.username); // Call handleLogin function from props
             navigate('/dashboard'); // redirection to dashboard page
           }
@@ -72,6 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission
+    setMsg(''); // Reset msg
 
     try {
       await mutation.mutateAsync(); // Execute the mutation and wait for it to finish
@@ -97,6 +104,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
     <div className="loginForm">
       <div className="modal">
+      {msg && <div className="msg">{msg}</div>}
+
         <span className="close" onClick={() => props.setOpen(false)}> {/* close the form */}
           x
         </span>
@@ -124,16 +133,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             />
             
           </div>
-            {/* <div className="item">
-                <label>Email</label>
-                <input
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) => handleInputChange(e, 'email')}
-                required
-                />
-            </div> */}
  
           <button type="submit">Send</button>
           {/* display errors*/}

@@ -1,0 +1,11 @@
+@import "../../styles/responsive.scss";
+@import "../../styles/variables.scss";
+
+.userStatus{
+
+    h1{
+        color: $dark-color;
+        font-size: clamp(24px, 5vw, 300px);
+    }
+
+}

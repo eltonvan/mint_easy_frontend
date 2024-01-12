@@ -1,19 +1,23 @@
 import "./navbar.scss";
-import { useState } from 'react';
 import LoginForm from "../loginForm/LoginForm";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
 
 
 
 
 const Navbar = () => {
-  const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
-  const [username, setUsername] = useState(''); // State to store the username
+  // const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+  // const [username, setUsername] = useState(''); // State to store the username
+  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername, msg } = useAuthStateContext();
+
+ 
 
 
+  
 
   const openLoginForm = () => {
     setShowLoginForm(true);
@@ -25,6 +29,8 @@ const Navbar = () => {
     // Perform logout actions
     
     Cookies.remove('authToken', { path: '/' }); // Remove authToken cookie
+    Cookies.remove('username', { path: '/' }); // Remove username cookie
+    Cookies.remove('csrftoken', { path: '/' }); // Remove csrftoken cookie
     // console.log("cookie", document.cookie)
 
     setUsername(''); // Reset username state
@@ -39,6 +45,8 @@ const Navbar = () => {
     // console.log("isLoggedIn", isLoggedIn)
 
     
+
+    
   };
 
   const handleLogin = (name: string) => {
@@ -46,12 +54,13 @@ const Navbar = () => {
     setIsLoggedIn(true); // Set login status to true
     setUsername(name); // Set username state
     setShowLoginForm(false); // Hide the login form
-    // console.log("triggered by handle login", showLoginForm)
+
 
   };
 
   return (
     <div className="navbar">
+      {msg && <div className="msg">{msg}</div>}
       <div className="logo">
         <img src="logoSI.svg" alt="" />
         <span>Mint Easy</span>

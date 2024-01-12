@@ -1,7 +1,6 @@
 // not in use
 // placeholder for further customization
 
-import { Link } from "react-router-dom";
 import "./tickerPanel.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 

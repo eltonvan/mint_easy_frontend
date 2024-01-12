@@ -1,4 +1,4 @@
-import userStatus from './UserStatus.scss'
+import './userStatus.scss'
 
 
 const UserStatus = () => {

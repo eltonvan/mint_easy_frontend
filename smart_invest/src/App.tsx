@@ -7,14 +7,12 @@ import Navbar from "./components/navbar/Navbar";
 import Trading from "./pages/trading/Trading";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/menu/Menu";
-import Login from "./pages/login/Login";
 import "./styles/global.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
 import Investing from "./pages/investing/Investing";
 import { AuthStateProvider } from "./contexts/AuthStateContext";
-import Cookies from 'js-cookie';
 
 
 

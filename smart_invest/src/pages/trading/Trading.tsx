@@ -1,7 +1,6 @@
 
 import "./trading.scss";
-import ChartBox from "../../components/chartBox/ChartBox";
-import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue } from "../../data";
+
 import News from "../../components/news/News";
 import UserStatus from "../../components/userStatus/UserStatus";
 
@@ -11,17 +10,27 @@ import TickerPanel from "../../components/tickerPanel/TickerPanel";
 
 
 const Trading = () => {
-    /* grid setup to the dashboard page
-     the dashboard is divided into 9 boxes
-     in each box we render a component
-    the components are imported from the components folder
-    the data is imported from data.ts based on the Variable name in the brackets
-    */
+  // Sample data for demonstration
+  const sampleData = [
+    { date: '2022-01-01', value: 100 },
+    { date: '2022-01-02', value: 150 },
+    
+  ];
     return (
         <div className="trading">
   
             <div className="box box10
-            "><TickerPanel /></div>
+            "><TickerPanel 
+            color="blue"
+            icon="/path/to/icon.png"
+            title="Ticker 1"
+            number={123}
+            percentage={5}
+            chartData={sampleData}
+            dataKey="value"
+            
+            
+            /></div>
 
             <div className="box box11"><UserStatus/></div>
 

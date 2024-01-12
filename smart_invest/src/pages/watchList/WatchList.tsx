@@ -1,5 +1,5 @@
 import "./watchList.scss"  ;
-import { useState } from "react";
+// import { useState } from "react";
 
 import DataTable from "../../components/dataTable/DataTable";
 
@@ -21,7 +21,7 @@ const columns: GridColDef[] = [
 
 
 export const WatchList = () => {
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     return (
         <div className="watchList">
             <div className="info">

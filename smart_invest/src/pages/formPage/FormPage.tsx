@@ -24,8 +24,10 @@ const FormPage = () => {
         if (path.startsWith('/reset-password')) {
             const uid = params[2]; // Extracting uid from URL
             const token = params[3]; // Extracting token from URL
+            console.log(uid, token);
 
             // Show the PassResetForm with the extracted uid and token
+
             // Pass these parameters to the PassResetForm component
             setOpen(true);
 
@@ -50,6 +52,7 @@ const FormPage = () => {
                 setIsLoggedIn(false);
                 setUsername(''); 
                 setMsg('Email confirmed, you can log in now');
+                console.log("msg", msg)
             }
 
 

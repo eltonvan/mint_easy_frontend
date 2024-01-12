@@ -1,5 +1,4 @@
 import "./navbar.scss";
-import { useState, memo } from 'react';
 import LoginForm from "../loginForm/LoginForm";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import QueryClientProvider
 import { useNavigate } from 'react-router-dom';
@@ -13,12 +12,10 @@ const Navbar = () => {
   // const [showLoginForm, setShowLoginForm] = useState(false); // State to control LoginForm visibility
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
   // const [username, setUsername] = useState(''); // State to store the username
-  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useAuthStateContext();
+  const { showLoginForm, isLoggedIn, username, setShowLoginForm, setIsLoggedIn, setUsername, msg } = useAuthStateContext();
 
  
-  console.log("navbar islogged in", isLoggedIn)
-  console.log("navbar username", username)
-  console.log("showLoginForm in navbar", showLoginForm)
+
 
   
 

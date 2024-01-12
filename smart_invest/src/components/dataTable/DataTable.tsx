@@ -6,7 +6,6 @@ import {
 } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 
 type Props = {
   columns: GridColDef[];
@@ -29,10 +28,13 @@ const DataTable = (props: Props) => {
   //   }
   // });
 
-  const handleDelete = (id: number) => {
-    //delete the item
-    mutation.mutate(id)
-  };
+  // const handleDelete = () => { // id: number
+  //   //delete the item
+  //   // mutation.mutate(id)
+    
+
+    
+  // };
 
   const actionColumn: GridColDef = {
     field: "action",
@@ -44,7 +46,7 @@ const DataTable = (props: Props) => {
           <Link to={`/${props.slug}/${params.row.id}`}>
             <img src="/view.svg" alt="" />
           </Link>
-          <div className="delete" onClick={() => handleDelete(params.row.id)}>
+          <div className="delete">
             <img src="/delete.svg" alt="" />
           </div>
         </div>

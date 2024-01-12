@@ -1,7 +1,5 @@
 
 import "./investing.scss";
-import ChartBox from "../../components/chartBox/ChartBox";
-import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue } from "../../data";
 import News from "../../components/news/News";
 import { Portfolio } from "../../components/portfolio/Portfolio";
 import { StockGenerator } from "../../components/stockGenerator/StockGenerator";// import { TextBox } from "../../components/textBox/TextBox";

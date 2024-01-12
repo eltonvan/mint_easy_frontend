@@ -12,6 +12,7 @@ import "./styles/global.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
+import Investing from "./pages/investing/Investing";
 import { AuthStateProvider } from "./contexts/AuthStateContext";
 import Cookies from 'js-cookie';
 
@@ -91,7 +92,7 @@ const router = createBrowserRouter([ // create the router
       },
       {
         path: "/invest",
-        element: <Dashboard />,
+        element: <Investing />,
       },
       {
         path: "/watchlist",
@@ -104,6 +105,9 @@ const router = createBrowserRouter([ // create the router
       {
         path: "/contact",
         element: <Dashboard />,
+      },
+      { path: "/subscribe",
+       element: <Dashboard /> 
       },
 
       {

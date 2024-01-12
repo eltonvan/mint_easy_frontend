@@ -38,11 +38,19 @@ export const menu = [
         },
 
         {
-          id: 6,
+          id: 8,
           title: "about us",
           url: "/about",
           icon: "profile.svg",
         },
+
+        {
+          id: 6,
+          title: "Subscribe",
+          url: "/",
+          icon: "note.svg",
+        },
+
         {
           id: 7,
           title: "Contact",
@@ -50,12 +58,7 @@ export const menu = [
           icon: "log.svg",
         },
 
-        {
-          id: 8,
-          title: "Invest now!",
-          url: "/",
-          icon: "note.svg",
-        },
+
       ],
     },
     // {

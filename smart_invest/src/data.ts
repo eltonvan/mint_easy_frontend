@@ -1,3 +1,4 @@
+
 export const menu = [
     {
       id: 1,
@@ -169,9 +170,9 @@ export const menu = [
   ];
   
   export const chartBoxUser = {
-    color: "#8884d8",
+    color: "#222b3c",
     icon: "/userIcon.svg",
-    title: "Total Users",
+    title: "Microsoft",
     number: "11.238",
     dataKey: "users",
     percentage: 45,
@@ -187,9 +188,9 @@ export const menu = [
   };
   
   export const chartBoxProduct = {
-    color: "skyblue",
+    color: "#222b3c",
     icon: "/productIcon.svg",
-    title: "Total Products",
+    title: "Amazon",
     number: "238",
     dataKey: "products",
     percentage: 21,
@@ -204,9 +205,9 @@ export const menu = [
     ],
   };
   export const chartBoxRevenue = {
-    color: "teal",
+    color: "#222b3c",
     icon: "/revenueIcon.svg",
-    title: "Total Revenue",
+    title: "Google",
     number: "$56.432",
     dataKey: "revenue",
     percentage: -12,
@@ -221,9 +222,9 @@ export const menu = [
     ],
   };
   export const chartBoxConversion = {
-    color: "gold",
+    color: "#222b3c",
     icon: "/conversionIcon.svg",
-    title: "Total Ratio",
+    title: "Apple",
     number: "2.6",
     dataKey: "ratio",
     percentage: 12,

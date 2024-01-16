@@ -5,6 +5,7 @@ import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barC
 import BarChartBox from "../../components/barChartBox/BarChartBox";
 import PieChartBox from "../../components/pieChartBox/PieChartBox";
 import BigChartBox from "../../components/bigChartBox/BigChartBox";
+import TickerPanel from "../../components/tickerPanel/TickerPanel";
 // import { TextBox } from "../../components/textBox/TextBox";
 
 
@@ -23,7 +24,8 @@ const Dashboard = () => {
             <TopBox />
             </div>
 
-            <div className="box box3"><ChartBox {...chartBoxUser}/></div> 
+            <div className="box box3"> <TickerPanel stockName="AAPL" />
+</div> 
             <div className="box box3"><ChartBox {...chartBoxProduct}/></div>
             <div className="box box4"><PieChartBox/></div>
             <div className="box box5"><ChartBox {...chartBoxConversion}/></div>

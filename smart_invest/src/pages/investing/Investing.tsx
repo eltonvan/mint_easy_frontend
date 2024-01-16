@@ -7,12 +7,7 @@ import { StockGenerator } from "../../components/stockGenerator/StockGenerator";
 
 
 const Investing = () => {
-    /* grid setup to the dashboard page
-     the dashboard is divided into 9 boxes
-     in each box we render a component
-    the components are imported from the components folder
-    the data is imported from data.ts based on the Variable name in the brackets
-    */
+
     return (
         <div className="investing">
   

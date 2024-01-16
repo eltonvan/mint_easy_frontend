@@ -7,7 +7,7 @@ import UserStatus from "../../components/userStatus/UserStatus";
 
 import TickerPanel from "../../components/tickerPanel/TickerPanel";
 import ChartBox from "../../components/chartBox/ChartBox";
-import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue } from "../../data";
+import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue, userStockData } from "../../data";
 // import { TextBox } from "../../components/textBox/TextBox";
 
 

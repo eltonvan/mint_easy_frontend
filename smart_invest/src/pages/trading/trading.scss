@@ -35,30 +35,25 @@
         color: $dark-color;
         font-weight: 500;
 
-        .chartBoxWrapper {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 20px;
-      
-            @include lg {
-              grid-template-columns: repeat(2, 1fr);
+
+        .slick-slide {
+            margin-right: 5px; //  space between slides
             }
       
-            @include md {
-              grid-template-columns: repeat(1, 1fr);
-            }
-      
-            .chartBoxContainer {
-                border: 1px solid $dark-color;
-                border-radius: 10px;
-                overflow: hidden;
-                padding:5%;
+        .chartBoxContainer {
+            border: 1px solid $dark-bg;
+            border-radius: 10px;
+            overflow: hidden;
+            padding:5%;
+            
+            
+   
                 
         
-                .chartBox {
-                  grid-row: span 1;
-                }
-              }
+            .chartBox {
+                grid-row: span 1;
+            
+            }
           }
 
 

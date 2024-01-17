@@ -15,6 +15,8 @@ RUN npm run build
 FROM nginx:latest
 # copy the build files to the nginx html directory
 COPY --from=builder /app/dist /usr/share/nginx/html
+# copy the custom nginx configuration
+COPY default.conf /etc/nginx/conf.d/default.conf
 # expose port 80
 EXPOSE 80
 # run nginx

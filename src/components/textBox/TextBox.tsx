@@ -5,8 +5,9 @@ import UserForm from '../userForm/UserForm'; // Import the UserForm component
 
 // Declare the type of the props
 type Props = {
-    title: string;
-    text: string;
+    pageTitle: string;
+    pageSubtitle: string;
+    pageText: string;
 };
 
 const TextBox = (props: Props) => {
@@ -19,10 +20,11 @@ const TextBox = (props: Props) => {
   return (
     <div>
       <div className="pageTitle"><h1>{props.title}</h1></div>
-      <div className="pageText"><h2>{props.text}</h2></div>
+      <div className="pageSubtitle"><h1>{props.subtitle}</h1></div>
+      <div className="pageText">{props.text}</div>
       <div className="btnPanel">
-        <div className="btn">I am an Investor</div>
-        <div className="btn">I am a Trader</div>
+        <div className="btn">I want to invest</div>
+        <div className="btn">I want to day trade</div>
         <div className="btn" onClick={openUserForm}>SignUp now!</div> 
       </div>
       

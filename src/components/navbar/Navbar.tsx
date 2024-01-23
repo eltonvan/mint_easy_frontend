@@ -62,8 +62,8 @@ const Navbar = () => {
     <div className="navbar">
       {msg && <div className="msg">{msg}</div>}
       <div className="logo">
-        <img src="logoSI.svg" alt="" />
-        <span>Mint Easy</span>
+        <img src="logo11.svg" alt="" />
+        
       </div>
       <div className="icons">
         <img src="/search.svg" alt="" className="icon" />

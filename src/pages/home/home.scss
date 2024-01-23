@@ -45,10 +45,17 @@
 
         }
 
+        .pageSubtitle{
+            color: $cooler-color;
+            font-size: clamp(16px, 5vw, 22px);
+            margin-bottom: 20px;
+
+        }
+
         .pageText{
 
             color: $dark-color;
-            font-size: clamp(16px, 5vw, 50px);
+            font-size: clamp(12px, 5vw, 24px);
             color:dimgrey
 
         }

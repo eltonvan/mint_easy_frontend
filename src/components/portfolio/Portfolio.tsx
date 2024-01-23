@@ -20,7 +20,7 @@ export const Portfolio: React.FC = () => {
       ws.onopen = () => { 
         console.log('connected');
         ws.send(JSON.stringify({
-          subscribe: ['MSFT', 'AAPL']
+          subscribe: ['MSFT', 'AAPL', 'TSLA']
         }));
       };
       
@@ -37,6 +37,7 @@ export const Portfolio: React.FC = () => {
           const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           setCurrent(next);
           console.log(next);
+          // ws.close();
         } catch (decodeError) {
           console.error('Error decoding message:', decodeError);
         }

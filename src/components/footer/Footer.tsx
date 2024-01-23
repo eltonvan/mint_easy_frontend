@@ -4,8 +4,8 @@ const Footer = () => {
     return (
         <div className="footer">
 
-            <span>Smart Invest inc.</span>
-            <span>Trade today and regret it tomorrow!</span>
+            <span>Mint Easy.inc</span>
+            <span>Your Path to Smart Investing</span>
         </div>
     )
 }

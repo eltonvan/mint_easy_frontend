@@ -1,8 +1,7 @@
 // Define the get_stock function
 import protobuf from "protobufjs";
 
-export const get_stock = (stock: string) => {
-    return new Promise((resolve, reject) => {
+export const get_stock = (stock: string, setStockData: any) => {
     const ws = new WebSocket('wss://streamer.finance.yahoo.com'); // connect to the WebSocket
 
     protobuf.load('/YPricingData.proto', (error, root) => {
@@ -34,17 +33,18 @@ export const get_stock = (stock: string) => {
           const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
           ws.close();
-          // console.log(next);
-          resolve(next);
+          //console.log("from util", next);
+          setStockData((prevData) => [...prevData, next]);
+    
           
         } catch (decodeError) {
             console.error('Error decoding message:', decodeError);
-            reject(decodeError);
+            
         }
       };
 
     });
-    });
+    
 
 
   };

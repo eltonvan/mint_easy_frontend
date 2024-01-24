@@ -2,6 +2,7 @@
 import protobuf from "protobufjs";
 
 export const get_stock = (stock: string) => {
+    return new Promise((resolve, reject) => {
     const ws = new WebSocket('wss://streamer.finance.yahoo.com'); // connect to the WebSocket
 
     protobuf.load('/YPricingData.proto', (error, root) => {
@@ -32,14 +33,17 @@ export const get_stock = (stock: string) => {
           // decode the binary data, set the current state, and loop through the data
           const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
-          console.log(next);
           ws.close();
-          return next;
+          // console.log(next);
+          resolve(next);
           
         } catch (decodeError) {
-          console.error('Error decoding message:', decodeError);
+            console.error('Error decoding message:', decodeError);
+            reject(decodeError);
         }
       };
+
+    });
     });
 
 

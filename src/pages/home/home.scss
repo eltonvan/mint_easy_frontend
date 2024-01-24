@@ -38,6 +38,9 @@
         grid-row: span 3;
          
         background-color:$soft-color;
+
+        display: grid; 
+        grid-template-rows: auto auto auto auto;
         
         .pageTitle{
             color: $dark-color;
@@ -66,8 +69,19 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
+        
+            @include md{
+                flex-direction: column;
+            }
+            @include sm{
+                flex-direction: column;
+            }
+            @include lg{
+                flex-direction: column;
+            }
 
             .btn{
+                
                 margin-top: 80px;
                 background-color: $dark-color;
                 color: $soft-color;
@@ -77,13 +91,27 @@
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
+
+                @include md{
+                    margin-top: 40px;
+                }
+                @include sm{
+                    margin-top: 40px;
+                }
+                @include lg{
+                    margin-top: 40px;
+                }
     
                 &:hover{
                     background-color: $soft-color;
                     color: $dark-color;
                     border : 5px solid $dark-color;
                 }
+
+        
             }
+
+        
         }
     }
 

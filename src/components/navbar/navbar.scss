@@ -11,6 +11,20 @@
         align-items: center;
         font-weight: bold;
         gap: 10px;
+
+        @include md {
+            img {
+                width: 180px; 
+                height: auto; 
+            }
+        }
+        @include sm {
+            img {
+                width: 180px; 
+                height: auto; 
+            }
+        }
+        
     }
     .icons{
         display: flex;

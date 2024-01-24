@@ -2,67 +2,92 @@
 @import "../../styles/variables.scss";
 
 .tickerPanel {
-  display: flex;
-  height: 100%;
 
-  @include sm{
-    flex-direction: column;
-  }
 
-  .boxInfo {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  grid-column: span 4;
+  grid-row: span 1;
+  background-color:$soft-color;
+  color: $dark-color;
+  font-weight: 500;
 
-    @include sm{
-      gap: 20px;
-    }
 
-    .title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+  .slick-slide {
+      margin-right: 5px; //  space between slides
+      }
 
-      @include xxl{
-        font-size: 14px;
+  .chartBoxContainer {
+      border: 1px solid $dark-bg;
+      border-radius: 10px;
+      overflow: hidden;
+      padding:5%;
+      
+      .chartBox {
+          grid-row: span 1;
+      
       }
     }
 
-    h1{
-      color: $dark-color;
-      font-size: clamp(24px, 5vw, 300px);
-  }
-  }
+  // display: flex;
+  // height: 100%;
 
-  .chartInfo {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  // @include sm{
+  //   flex-direction: column;
+  // }
 
-    .chart {
-      width: 100%;
-      height: 100%;
-    }
+  // .boxInfo {
+  //   flex: 3;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-between;
 
-    .texts {
-      display: flex;
-      flex-direction: column;
-      text-align: right;
+  //   @include sm{
+  //     gap: 20px;
+  //   }
 
-      .percentage {
-        font-weight: bold;
-        font-size: 20px;
+  //   .title {
+  //     display: flex;
+  //     align-items: center;
+  //     gap: 10px;
 
-        @include xxl{
-          font-size: 16px;
-        }
-      }
+  //     @include xxl{
+  //       font-size: 14px;
+  //     }
+  //   }
 
-      .duration{
-        font-size: 14px;
-      }
-    }
-  }
+  //   h1{
+  //     color: $dark-color;
+  //     font-size: clamp(24px, 5vw, 300px);
+  // }
+  // }
+
+  // .chartInfo {
+  //   flex: 2;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-between;
+
+  //   .chart {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+
+  //   .texts {
+  //     display: flex;
+  //     flex-direction: column;
+  //     text-align: right;
+
+  //     .percentage {
+  //       font-weight: bold;
+  //       font-size: 20px;
+
+  //       @include xxl{
+  //         font-size: 16px;
+  //       }
+  //     }
+
+  //     .duration{
+  //       font-size: 14px;
+  //     }
+  //   }
+  // }
 }

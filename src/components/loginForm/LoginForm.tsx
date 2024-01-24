@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         .then((response) => {
           console.log(response);
           const responseData = response.data;
-          console.log("test");
+          console.log(responseData);
           if (responseData.key) { // If a key is returned, login was successful
             Cookies.set('authToken', responseData.key, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
             Cookies.set('username', formData.username, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day

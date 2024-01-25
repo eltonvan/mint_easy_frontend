@@ -2,14 +2,15 @@ import React from 'react';
 import './userStatus.scss';
 
 
-type Props = {
+type UserStatusProps = {
   name: string;
-  available: number;
-  invested: number;
+  initialSum: number;
+  availableSum: number;
+  investedSum: number;
   profitLoss: number;
 }
 
-const UserStatus = (props:Props) => {
+const UserStatus = (props:UserStatusProps) => {
   return (
     <div className='userStatus'>
 

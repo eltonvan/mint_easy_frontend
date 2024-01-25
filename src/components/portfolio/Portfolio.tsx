@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import protobuf from "protobufjs"; // decode the binary data
+import React, { useEffect, useState, useRef } from "react";
+import protobuf from "protobufjs"; 
 import "./portfolio.scss";
-import { get_stock } from "./util";
+// import { get_stock } from "./util";
+
 
 export const Portfolio: React.FC = () => {
   const [stockData, setStockData] = useState<any[]>([]);
+  const stockSymbolsRef = useRef(["MSFT", "TSLA", "AAPL", "AMZN"]);
 
   useEffect(() => {
-    const stockSymbols = ["MSFT", "TSLA", "AAPL", "AMZN", "META", "HYZN"];
-
-    // Establish WebSocket connection outside the loop
     const ws = new WebSocket("wss://streamer.finance.yahoo.com");
 
     protobuf.load('/YPricingData.proto', (error, root) => {
@@ -18,48 +17,48 @@ export const Portfolio: React.FC = () => {
         return;
       }
 
-      // get the Yaticker type from the protobuf
       const Yaticker = root.lookupType("yaticker");
 
-      // subscribe to all specified stock tickers
       ws.onopen = () => {
         console.log('connected');
         ws.send(JSON.stringify({
-          subscribe: stockSymbols,
+          subscribe: stockSymbolsRef.current,
         }));
       };
 
-      // handle the close event
       ws.onclose = () => {
         console.log('disconnected');
       };
 
-      // handle the message event
       ws.onmessage = (event) => {
         try {
           const messageData = event.data;
-          // decode the binary data, set the current state, and loop through the data
           const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
           setStockData((prevData) => {
-            // Check if the stock data already exists in the array
+            console.log("next", next)
             const existingIndex = prevData.findIndex((item) => item.id === next.id);
             if (existingIndex === -1) {
-              // If not, add the new data
               return [...prevData, next];
             } else {
-              // If exists, update the data
               prevData[existingIndex] = next;
               return [...prevData];
             }
           });
+          console.log("stockSymbolsRef.current.length", stockSymbolsRef.current.length)
+          console.log("stockData.length", stockData.length)
+          console.log("stockData", stockData)
+          // Check if lengths are equal and close the connection
+          if (stockSymbolsRef.current.length === stockData.length) {
+            ws.close();
+          }
+
         } catch (decodeError) {
           console.error('Error decoding message:', decodeError);
         }
       };
     });
 
-    // Clean up WebSocket connection on component unmount
     return () => {
       ws.close();
     };

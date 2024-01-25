@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FormPage from "./pages/formPage/FormPage";
 import Investing from "./pages/investing/Investing";
 import { AuthStateProvider } from "./contexts/AuthStateContext";
+import CookieConsent from "react-cookie-consent";
 
 
 
@@ -63,6 +64,17 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
           <div className="contentContainer">
             {routes || <Outlet />}
           </div>
+          <CookieConsent
+  location="bottom"
+  buttonText="hell ye!!"
+  cookieName="myconsent"
+  style={{ background:"#222b3c" }}
+  buttonStyle={{ color: "#4e503b", fontSize: "13px", background: "#" }}
+  expires={150}
+>
+  This website uses cookies to enhance the user experience.{"#dddddd"}
+  <span style={{ fontSize: "10px" }}></span>
+</CookieConsent>
         </div>
         <Footer />
         

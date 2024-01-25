@@ -1,8 +1,7 @@
 // Define the get_stock function
 import protobuf from "protobufjs";
 
-export const get_stock = (stock: string, setStockData: any) => {
-    const ws = new WebSocket('wss://streamer.finance.yahoo.com'); // connect to the WebSocket
+export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
 
     protobuf.load('/YPricingData.proto', (error, root) => {
       if (error) {
@@ -16,7 +15,7 @@ export const get_stock = (stock: string, setStockData: any) => {
       ws.onopen = () => { 
         console.log('connected');
         ws.send(JSON.stringify({
-          subscribe: [stock] // Use the provided stock parameter
+          subscribe: stocks // Use the provided stock parameter
         }));
       };
       
@@ -24,7 +23,6 @@ export const get_stock = (stock: string, setStockData: any) => {
       ws.onclose = () => {
         console.log('disconnected');
       };
-
       // handle the message event
       ws.onmessage = (event) => {
         try {
@@ -32,11 +30,23 @@ export const get_stock = (stock: string, setStockData: any) => {
           // decode the binary data, set the current state, and loop through the data
           const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
-          ws.close();
-          //console.log("from util", next);
-          setStockData((prevData) => [...prevData, next]);
-    
-          
+          setStockData((prevData) => {
+            let exists = false;
+            const updatedData = prevData.map((item) => {
+              if (item.id === next.id) {
+                exists = true;
+                return next;
+              }
+              return item;
+            });
+
+            if (!exists) {
+              return [...updatedData, next];
+            }
+            
+            return updatedData;
+          });
+        
         } catch (decodeError) {
             console.error('Error decoding message:', decodeError);
             

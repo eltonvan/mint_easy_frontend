@@ -714,6 +714,8 @@ export const userStockData = [
     
   },
 
+  
+
   {
     id:2,
     color: "black",
@@ -807,6 +809,8 @@ export const userStockData = [
   },
 
 ];
+
+
 
 export const stockPortfolioItems = [
   {

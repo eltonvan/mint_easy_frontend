@@ -7,10 +7,9 @@ import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
 type Props = {
     color: string;
-    icon: string;
-    title: string;
-    number: number | string;
-    percentage: number;
+    title: string; // symbol
+    number: number | string; // $
+    percentage: number; // %
     chartData: object[];
     dataKey: string;
 };
@@ -38,16 +37,17 @@ const ChartBox = (props: Props) => {
             <Line
                 type="monotone"
                 dataKey={props.dataKey}
-                stroke={props.color}
+                stroke= {props.color}
                 strokeWidth={2}
                 dot={false}
+                isAnimationActive={false}
             />
             </LineChart>
           </ResponsiveContainer>
         </div>
         <div className="texts">
           <span className="percentage" style={{color: props.percentage<0 ? "tomato" : "limegreen"}}>{props.percentage}%</span>
-          <span className="duration">this week</span>
+          <span className="duration"></span>
         </div>
       </div>
     </div>

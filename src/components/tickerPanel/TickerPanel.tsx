@@ -60,7 +60,7 @@ const TickerPanel = () => {
   }, []); 
 
   useEffect(() => {
-    console.log("stockData", stockData);
+    // console.log("stockData", stockData);
 
     const cleanData = stockData.map((item, index) => {
       const id = item.id;

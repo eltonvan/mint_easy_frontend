@@ -50,16 +50,17 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   const mutation = useMutation({
     mutationFn: () => {
-      return instance.post('/dj-rest-auth/login/', formData)
+      return instance.post('/login/', formData)
         .then((response) => {
           console.log(response);
           const responseData = response.data;
           console.log(responseData);
-          if (responseData.key) { // If a key is returned, login was successful
-            Cookies.set('authToken', responseData.key, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
+          if (responseData.auth_token) { // If a key is returned, login was successful
+            Cookies.set('authToken', responseData.auth_token, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
             Cookies.set('username', formData.username, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day
+            Cookies.set('userId', responseData.user_id, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day
             props.handleLogin(formData.username); // Call handleLogin function from props
-            navigate('/dashboard'); // redirection to dashboard page
+            navigate('/trading'); // redirection to trading page
           }
           return response;
         })

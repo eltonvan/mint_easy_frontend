@@ -10,6 +10,8 @@ interface AuthStateContextProps {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   msg: string;
   setMsg: React.Dispatch<React.SetStateAction<string>>;
+  userId: number;
+  setUserId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const AuthStateContext = createContext<AuthStateContextProps | undefined>(undefined);
@@ -31,13 +33,16 @@ export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [msg, setMsg] = useState('');
+  const [userId, setUserId] = useState(0);
 
   useEffect(()=> {
     const authToken = Cookies.get('authToken'); // Get authToken from cookie
     const user = Cookies.get('username'); // Get username from cookie
+    //const userId = Cookies.get('userId'); // Get username from cookie
     if (authToken) {
       setIsLoggedIn(true); // Set login status to true if authToken exists
       setUsername(user || 'no user cookie'); // Set username state
+      //setUserId(parseInt(userId || '0'));
     }
   }
   , []);
@@ -45,7 +50,7 @@ export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }
 
 
   return (
-    <AuthStateContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg }}>
+    <AuthStateContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg, userId, setUserId }}>
       {children}
     </AuthStateContext.Provider>
   );

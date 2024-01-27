@@ -16,6 +16,18 @@
         background-color: $main-bg;
         position: relative;
 
+        .signup-link{
+            font-size: 20px;
+            margin-top: 10px;
+
+            &:hover {
+                color: $soft-color;
+                text-decoration: underline;
+            }
+        }
+
+   
+
         h1{
             margin-bottom: 40px;
             font-size: 24px;
@@ -59,7 +71,14 @@
                 width: 100%;
                 padding: 10px;
                 cursor: pointer;
-            }    
+            }
+
+            
+        .slug{
+            font-size: 20px;
+            color: red($color: #000000);
+
+        }
 
            
         }

@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 interface AuthStateContextProps {
   showLoginForm: boolean;
   setShowLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
+  showUserForm: boolean;
+  setShowUserForm: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   username: string;
@@ -12,6 +14,7 @@ interface AuthStateContextProps {
   setMsg: React.Dispatch<React.SetStateAction<string>>;
   userId: number;
   setUserId: React.Dispatch<React.SetStateAction<number>>;
+
 }
 
 const AuthStateContext = createContext<AuthStateContextProps | undefined>(undefined);
@@ -30,6 +33,7 @@ interface AuthStateProviderProps {
 
 export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showUserForm, setShowUserForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [msg, setMsg] = useState('');
@@ -38,11 +42,11 @@ export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }
   useEffect(()=> {
     const authToken = Cookies.get('authToken'); // Get authToken from cookie
     const user = Cookies.get('username'); // Get username from cookie
-    //const userId = Cookies.get('userId'); // Get username from cookie
+    const userId = Cookies.get('userId'); // Get username from cookie
     if (authToken) {
       setIsLoggedIn(true); // Set login status to true if authToken exists
       setUsername(user || 'no user cookie'); // Set username state
-      //setUserId(parseInt(userId || '0'));
+      setUserId(parseInt(userId || '0'));
     }
   }
   , []);
@@ -50,7 +54,7 @@ export const AuthStateProvider: React.FC<AuthStateProviderProps> = ({ children }
 
 
   return (
-    <AuthStateContext.Provider value={{ showLoginForm, setShowLoginForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg, userId, setUserId }}>
+    <AuthStateContext.Provider value={{ showLoginForm, setShowLoginForm, showUserForm, setShowUserForm, isLoggedIn, setIsLoggedIn, username, setUsername, msg, setMsg, userId, setUserId }}>
       {children}
     </AuthStateContext.Provider>
   );

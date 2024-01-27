@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
 import { useAuthStateContext } from "../../contexts/AuthStateContext";
-
+import { Link, Navigate } from 'react-router-dom'
 
 
 // declare the type of the form data
@@ -95,9 +95,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     setFormData({ ...formData, [field]: e.target.value }); // Update form data
   };
 
-  // const setFormOpen = (open: boolean) => {
-  //   props.setOpen(open); // Set the open state of the form
-  // };
+  const handleCloseModal = () => {
+    props.setOpen(false);
+    navigate('/');
+  };
 
 
   return (
@@ -107,7 +108,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       <div className="modal">
       {msg && <div className="msg">{msg}</div>}
 
-        <span className="close" onClick={() => props.setOpen(false)}> {/* close the form */}
+      <span className="close" onClick={handleCloseModal}>
           x
         </span>
         <h1>{props.slug}</h1>
@@ -142,6 +143,14 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
           
         </form>
+
+        <div className="signup-link">
+          Don't have an account yet?{' '}
+          <Link to="/signup" onClick={() => props.setOpen(false)}>
+            Sign up for free!
+          </Link>
+          </div>
+        
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import "./textBox.scss"
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from 'react';
 import UserForm from '../userForm/UserForm'; // Import the UserForm component
+import { Link } from 'react-router-dom'
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
 
 // Declare the type of the props
 type Props = {
@@ -11,7 +12,8 @@ type Props = {
 };
 
 const TextBox = (props: Props) => {
-  const [showUserForm, setShowUserForm] = useState(false); // State to control UserForm visibility
+  //const [showUserForm, setShowUserForm] = useState(false); // State to control UserForm visibility
+  const { showUserForm, setShowUserForm } = useAuthStateContext();
 
   const openUserForm = () => {
     setShowUserForm(true); // Function to show UserForm
@@ -23,8 +25,12 @@ const TextBox = (props: Props) => {
       <div className="pageSubtitle"><h1>{props.subtitle}</h1></div>
       <div className="pageText">{props.text}</div>
       <div className="btnPanel">
-        <div className="btn">I want to invest</div>
+      <Link to="/invest">
+            <div className="btn">I want to invest</div>
+            </Link>
+            <Link to="/trading">
         <div className="btn">I want to day trade</div>
+        </Link>
         <div className="btn" onClick={openUserForm}>SignUp now!</div> 
       </div>
       

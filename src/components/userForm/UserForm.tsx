@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import './userForm.scss';
 import { instance , updateCSRFToken } from '../../axiosInstance';
+import { useNavigate } from 'react-router-dom';
 // import Cookies from 'js-cookie';
 // import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
@@ -31,6 +32,7 @@ type UserFormProps = {
 };
 // set the initial state of the form data
 const UserForm: React.FC<UserFormProps> = (props) => {
+  const navigate = useNavigate(); // Declare navigate function from react-router-dom
 //  const queryClient = useQueryClient();
   const [formData, setFormData] = useState<UserFormData>({
     username: '',
@@ -98,10 +100,15 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     setErrors({ ...errors, [field]: null });
   };
 
+  const handleCloseModal = () => {
+    props.setOpen(false);
+    navigate('/');
+  };
+
   return (
     <div className="userForm">
       <div className="modal">
-        <span className="close" onClick={() => props.setOpen(false)}>
+      <span className="close" onClick={handleCloseModal}>
           x
         </span>
         {/* If there is a message display it otherwise display the form */}

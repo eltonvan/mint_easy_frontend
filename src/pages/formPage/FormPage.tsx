@@ -4,6 +4,7 @@ import "./formPage.scss";
 import PassResetForm from "../../components/passResetForm/PassResetForm";
 import { instance } from '../../axiosInstance';
 import LoginForm from "../../components/loginForm/LoginForm";
+import UserForm from "../../components/userForm/UserForm";
 import { useAuthStateContext } from "../../contexts/AuthStateContext";
 import { useNavigate } from "react-router-dom";
 const FormPage = () => {
@@ -11,7 +12,8 @@ const FormPage = () => {
     //const history = useHistory();
     const location = useLocation();
     const navigate = useNavigate();
-    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg } = useAuthStateContext();
+    let slug = "";
+    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg, showUserForm, setShowUserForm } = useAuthStateContext();
 
 
 
@@ -51,7 +53,8 @@ const FormPage = () => {
                 setShowLoginForm(true);
                 setIsLoggedIn(false);
                 setUsername(''); 
-                setMsg('Email confirmed, you can log in now');
+                // setMsg('Email confirmed, you can log in now');
+                slug = "Email confirmed, you can log in now";
                 console.log("msg", msg)
             }
 
@@ -65,17 +68,25 @@ const FormPage = () => {
                 console.log(error);
             });
         }
+
+        if (path.startsWith('/login')) {
+            setShowLoginForm(true);
+            // setMsg('Please log in to continue');
+            slug = "Please log in to continue";
+        }
+
+        if (path.startsWith('/signup')) {
+            setShowUserForm(true);
+            // setMsg('Create an account to continue');
+            slug = "Create an account to continue";
+        }
     }, [location.pathname, setShowLoginForm, setIsLoggedIn, setUsername, open]); 
 
     return (
         <div className="home">
-            {open && (
-                <div className="passResetForm">
-                    <PassResetForm setOpen={setOpen} />
-                </div>
-            )}
-        {showLoginForm && <LoginForm slug="Password verified, you can log in now" setOpen={setShowLoginForm} handleLogin={() => {}} />}
-
+            {open && (<div className="passResetForm"> <PassResetForm setOpen={setOpen} /> </div> )}
+        {showLoginForm && <LoginForm slug={slug} setOpen={setShowLoginForm} handleLogin={() => {}} />}
+        {showUserForm && <UserForm slug="Sign Up" setOpen={setShowUserForm} />} 
         </div>
     );
 };

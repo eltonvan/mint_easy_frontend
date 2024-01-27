@@ -14,6 +14,8 @@ import FormPage from "./pages/formPage/FormPage";
 import Investing from "./pages/investing/Investing";
 import { AuthStateProvider } from "./contexts/AuthStateContext";
 import CookieConsent from "react-cookie-consent";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+import LoginForm from "./components/loginForm/LoginForm";
 
 
 
@@ -94,19 +96,21 @@ const router = createBrowserRouter([ // create the router
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <ProtectedRoute element={<Dashboard />} />,
       },
       {
         path: "/trading",
-        element: <Trading />,
+        element: <ProtectedRoute element={<Trading />} />,
       },
+
       {
         path: "/invest",
-        element: <Investing />,
+        element: <ProtectedRoute element={<Investing />} />,
       },
+
       {
         path: "/watchlist",
-        element: <WatchList />,
+        element: <ProtectedRoute element={<WatchList />} />,
       },
       {
         path: "/about",
@@ -128,9 +132,40 @@ const router = createBrowserRouter([ // create the router
         path: "/confirm-email/:key",
         element: <FormPage />,
       },
+      { 
+        path: "/login",
+        element: <FormPage />,
+      },
+      {
+        path: "/signup",
+        element: <FormPage />,
+      },
+      
     ],
   },
-
+ // dont show menu on login and signup and form pages
+  {
+    path: "/",
+    element: <Layout showMenu={false} />,
+    children: [
+      {
+        path: "/login",
+        element: <FormPage />,
+      },
+      {
+        path: "/signup",
+        element: <FormPage />,
+      },
+      {
+        path: "/reset-password/:uid/:token",
+        element: <FormPage />,
+      },
+      {
+        path: "/confirm-email/:key",
+        element: <FormPage />,
+      },
+    ],
+  },
 ]);
 
 function App() {

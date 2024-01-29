@@ -40,15 +40,18 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
       element: <Home />,
     },
     {
-      path: '/dashboard',
-      element: <Dashboard />,
+      path: "/dashboard",
+      element: <ProtectedRoute element={<Dashboard />} />,
     },
   ]);
 
   // Check if the current route is the home page
   const isHome = window.location.pathname === '/';
 
-  const renderMenu = showMenu && !isHome ? (
+  // Render the menu if showMenu is true and the current route is not the home page
+  //   const renderMenu = showMenu && !isHome ? ( // use this to hide menu on the homepage
+
+  const renderMenu = showMenu ? (
     <div className="menuContainer">
       <Menu />
     </div>
@@ -114,14 +117,14 @@ const router = createBrowserRouter([ // create the router
       },
       {
         path: "/about",
-        element: <Dashboard />,
+        element: <Home />,
       },
       {
         path: "/contact",
-        element: <Dashboard />,
+        element: <Home />,
       },
       { path: "/subscribe",
-       element: <Dashboard /> 
+       element: <Home />, 
       },
 
       {

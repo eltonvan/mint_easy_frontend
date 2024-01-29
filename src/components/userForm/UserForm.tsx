@@ -50,6 +50,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
   });
 
   const [msg, setMsg] = useState<string | null>(null); // set the initial state of the message
+  const [termsChecked, setTermsChecked] = useState(false); 
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -77,6 +78,10 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { // e stands for event
     e.preventDefault(); // prevent the default behaviour of the form like page refresh or redirect
+
+    if (!termsChecked) {
+      return alert("Please accept the terms and conditions."); // Check if AGB checkbox is checked
+    }
     
     if (formData.password1 !== formData.password2) { // local validation
       return alert("Passwords don't match!");
@@ -181,6 +186,18 @@ const UserForm: React.FC<UserFormProps> = (props) => {
             {errors.password2 && <p>{errors.password2}</p>}
             {msg && <p>{msg}</p>}
           </div>
+
+          <div className='termsCheckbox'>
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  
+                  checked={termsChecked}
+                  onChange={() => setTermsChecked(!termsChecked)} // Update checkbox state
+                  required
+                />
+                <label htmlFor="termsCheckbox">I agree to the <a href='AGBminteasy.pdf'>terms</a> and conditions</label>
+              </div>
 
           {/* Submit Button */}
           <button type="submit">Send</button>

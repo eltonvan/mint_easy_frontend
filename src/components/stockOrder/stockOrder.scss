@@ -1,5 +1,5 @@
 @import "../../styles/variables.scss";
-.userForm {
+.stockOrder {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -10,13 +10,28 @@
     justify-content: center;
     align-items: center;
 
+    display: none;
 
+    &.open {
+        display: flex;
+    }
 
     .modal { 
         padding: 50px;
         border-radius: 10px;
         background-color: $main-bg;
         position: relative;
+
+        .checkbox-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        checkbox{
+            width: 20px;
+            height: 20px;
+        }
 
         h1{
             margin-bottom: 40px;
@@ -74,6 +89,7 @@
                 
                 label{
                     font-size: 21px;
+                    color: $soft-color;
 
                 }
                 input{
@@ -116,4 +132,5 @@
         }
 
     }
+
 }

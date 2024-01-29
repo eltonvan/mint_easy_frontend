@@ -16,8 +16,9 @@ attaching a CSRF token to all the requests
 export const instance: AxiosInstance = axios.create({ 
   baseURL: 'https://backend.mint-easy.de', // Base URL of the backend
   xsrfCookieName: 'csrftoken', // The name of the cookie containing the CSRF token
-  xsrfHeaderName: 'X-CSRFToken', // The name of the header containing the CSRF token
+  xsrfHeaderName: 'authToken', // The name of the header containing the CSRF token
   withCredentials: true, // Whether to send cookies with the request
+
 });
 
 export const updateCSRFToken = async (): Promise<void> => {

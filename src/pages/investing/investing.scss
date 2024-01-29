@@ -30,7 +30,7 @@
 
     .box14{
         grid-column: span 3;
-        grid-row: span 3;
+        grid-row: span 1;
         background-color:$soft-color;
         color: $dark-color;
         font-weight: 500;
@@ -40,7 +40,7 @@
 
     .box11{
         grid-column: span 4;
-        grid-row: span 3;
+        grid-row: span 1;
         background-color:$soft-color;
         color: $dark-color;
         font-weight: 500;
@@ -73,7 +73,7 @@
 
     .box13{
         grid-column: span 1;
-        grid-row: span 3;
+        grid-row: span 1;
         background-color:$soft-color;
         color: $dark-color;
         font-weight: 500;

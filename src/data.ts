@@ -1,7 +1,7 @@
 export const menu = [
   {
     id: 1,
-    title: "main",
+    title: "",
     listItems: [
       {
         id: 1,
@@ -39,7 +39,7 @@ export const menu = [
 
       {
         id: 8,
-        title: "about us",
+        title: "About us",
         url: "/about",
         icon: "profile.svg",
       },

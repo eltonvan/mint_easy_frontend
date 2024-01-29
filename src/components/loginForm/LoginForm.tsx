@@ -26,8 +26,7 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const {msg, setMsg } = useAuthStateContext();
-
+  const {msg, setMsg, isLoggedIn, setIsLoggedIn,showLoginForm, setShowLoginForm, username , setUsername, handleLogin } = useAuthStateContext();
   // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({
     username: '',
@@ -54,13 +53,16 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         .then((response) => {
           console.log(response);
           const responseData = response.data;
-          console.log(responseData);
+          console.log("authtoken", responseData.auth_token);
           if (responseData.auth_token) { // If a key is returned, login was successful
+            setIsLoggedIn(true);
+            setShowLoginForm(false);
+            setUsername(formData.username);
             Cookies.set('authToken', responseData.auth_token, { expires: 1, path: '/' }); // Store the token in cookie with expiry of 1 day
             Cookies.set('username', formData.username, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day
             Cookies.set('userId', responseData.user_id, { expires: 1, path: '/' }); // Store the username in cookie with expiry of 1 day
             props.handleLogin(formData.username); // Call handleLogin function from props
-            navigate('/trading'); // redirection to trading page
+            navigate('/invest'); // redirection to trading page
           }
           return response;
         })

@@ -37,7 +37,8 @@
     "recharts": "^2.9.2",
     "sass": "^1.69.5",
     "slick-carousel": "^1.8.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yahoo-finance2": "^2.9.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

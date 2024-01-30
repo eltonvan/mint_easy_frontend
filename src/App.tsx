@@ -15,7 +15,7 @@ import Investing from "./pages/investing/Investing";
 import { AuthStateProvider } from "./contexts/AuthStateContext";
 import CookieConsent from "react-cookie-consent";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
-import LoginForm from "./components/loginForm/LoginForm";
+// import LoginForm from "./components/loginForm/LoginForm";
 
 
 
@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
   ]);
 
   // Check if the current route is the home page
-  const isHome = window.location.pathname === '/';
+  // const isHome = window.location.pathname === '/';
 
   // Render the menu if showMenu is true and the current route is not the home page
   //   const renderMenu = showMenu && !isHome ? ( // use this to hide menu on the homepage

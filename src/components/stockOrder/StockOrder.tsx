@@ -6,6 +6,7 @@ import { useAuthStateContext } from "../../contexts/AuthStateContext";
 import  { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { updateCSRFToken } from '../../axiosInstance';
+import axios from 'axios';
 
 
 
@@ -15,6 +16,7 @@ type StockOrderData = {
     long_term_invest : boolean;
     symbol : string;
     buy : boolean;
+    sell : boolean;
     open_price : number;
     close_price : number;
     quantity : number;
@@ -38,16 +40,19 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
     const navigate = useNavigate(); // Declare navigate function from react-router-dom
     const [formData, setFormData] = useState<StockOrderData>({
         day_trading: false,
-        long_term_invest : false,
+        long_term_invest : true,
         symbol : '',
         buy : true,
+        sell : false,
         open_price : 0,
         close_price : 0,
         quantity : 0,
         amount : 0,
         stop_loss : 0,
         take_profit : 0,
-        user_id : 32,
+        user_id : userId,
+
+       
         ...props.initialData, // Merge with initialData from props
 
     });
@@ -67,21 +72,30 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
         user_id : null,
     });
 
+    const updateData = ()=>{
+        axios.put(`https://backend.mint-easy.de/data/stock-orders/${userId}/`, formData, {
+            headers: {'Authorization': 'Token 4a8a76fff8c2dc165ac29b61a70a06ba4bf951d6'}
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
     const mutation = useMutation({
         mutationFn: async () => {
         updateCSRFToken();
-        console.log(formData);
+        console.log("formdata",formData);
         console.log(userId);
-        instance.post(`/data/stock-orders/32/`, formData) // send the data to the backend
-        
 
-
+        instance.put(`/data/stock-orders/32/`, formData) // send the data to the backend
         .then((response) => {
             console.log(formData);
             console.log(userId);
             console.log(response);
             if (response.data && response.data.message) {
-        
             setMsg(response.data.message); // set the message
             console.log(msg);
             }
@@ -91,12 +105,10 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             setErrors(error.response.data); // set the errors
         });
         },
-
         onSuccess: () => {
         // queryClient.invalidateQueries([`all${props.slug}s`]); // invalidate the query preparing it for a refetch
         },
     });
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
         setFormData({ ...formData, [field]: e.target.value });
     
@@ -227,7 +239,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
 
             </div>  
 
-            <div className="item">
+            {/* <div className="item">
     <label htmlFor="trading_type">Trading Type</label>
     <select
         id="trading_type"
@@ -239,7 +251,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
         <option value="long_term_invest">Long Term Invest</option>
     </select>
     {errors.long_term_invest && <div className="error">{errors.long_term_invest}</div>}
-</div>
+</div> */}
 
 
             <div className="item">

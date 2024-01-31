@@ -1,4 +1,3 @@
-import React from 'react'
 import "./stockOrder.scss"
 import { instance } from '../../axiosInstance';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +6,8 @@ import  { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { updateCSRFToken } from '../../axiosInstance';
 import axios from 'axios';
+import  { useEffect } from 'react';
+import DataTable from "../dataTable/DataTable";
 
 
 
@@ -35,6 +36,7 @@ type StockOrderData = {
 
 
 export const StockOrder: React.FC<StockOrderProps> = (props) => {
+
     const {userId, setUserId, msg, setMsg } = useAuthStateContext();
 
     const navigate = useNavigate(); // Declare navigate function from react-router-dom
@@ -57,6 +59,13 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
 
     });
 
+    const [stockPrice, setStockPrice] = useState<number | null>(null); 
+    const [totalPrice, setTotalPrice] = useState<number | null>(null);
+    const [profitLossData, setProfitLossData] = useState<any[]>([]); 
+
+
+
+
     // set the initial state of the errors
     const [errors, setErrors] = useState<{ [key: string]: string | null }>({
         day_trading: null,
@@ -72,46 +81,64 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
         user_id : null,
     });
 
-    const updateData = ()=>{
-        axios.put(`https://backend.mint-easy.de/data/stock-orders/${userId}/`, formData, {
-            headers: {'Authorization': 'Token 4a8a76fff8c2dc165ac29b61a70a06ba4bf951d6'}
-        })
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
 
     const mutation = useMutation({
         mutationFn: async () => {
-        updateCSRFToken();
-        console.log("formdata",formData);
-        console.log(userId);
+          updateCSRFToken();
+          console.log("formdata", formData);
+          console.log(userId);
+      
+          instance.put(`/data/stock-orders/${userId}/`, formData)
+            .then((response) => {
+              console.log(formData);
+              console.log(userId);
+              console.log(response);
+              if (response.data && response.data.message) {
+                setMsg(response.data.message);
+                console.log(msg);
+              }
+            })
+            .catch((error) => {
+              setErrors(error.response.data);
+            });
+        },
+        onSuccess: async () => {
 
-        instance.put(`/data/stock-orders/32/`, formData) // send the data to the backend
-        .then((response) => {
-            console.log(formData);
-            console.log(userId);
-            console.log(response);
-            if (response.data && response.data.message) {
-            setMsg(response.data.message); // set the message
-            console.log(msg);
-            }
-        },)
-        .catch((error) => { // catch any errors
-            // console.log(error);
-            setErrors(error.response.data); // set the errors
-        });
+            try {
+                // Run the request in line 45 of the Investing component
+                const profitLossResponse = await instance.get(`/data/stock-order/${userId}/profit-loss/`);
+                console.log("Profit/Loss data:", profitLossResponse.data);
+                setProfitLossData(profitLossResponse.data);
+              } catch (error) {
+                console.error("Error fetching profit/loss data:", error);
+              }    
+          // Clear the form data
+          setFormData({
+            day_trading: false,
+            long_term_invest: true,
+            symbol: '',
+            buy: true,
+            sell: false,
+            open_price: 0,
+            close_price: 0,
+            quantity: 0,
+            amount: 0,
+            stop_loss: 0,
+            take_profit: 0,
+            user_id: userId,
+            ...props.initialData,
+          });
+
+          setStockPrice(null);
+          setTotalPrice(null);
+      
+          props.setOpen(false);
+      
+
         },
-        onSuccess: () => {
-        // queryClient.invalidateQueries([`all${props.slug}s`]); // invalidate the query preparing it for a refetch
-        },
-    });
+      });
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
         setFormData({ ...formData, [field]: e.target.value });
-    
         setErrors({ ...errors, [field]: null });
       };
     
@@ -122,19 +149,45 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
         };
     
         const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Prevent default form submission
-        setMsg(''); // Reset msg
+        e.preventDefault(); 
+        setMsg(''); 
 
         try {
-            await mutation.mutateAsync(); // Execute the mutation and wait for it to finish
+            await mutation.mutateAsync(); 
       
           } catch (error) {
             if (error instanceof Error) {
-              setErrors(error.message); // Set error message
+              setErrors(error.message); 
             }
           }
 
       };
+
+      useEffect(() => {
+        const fetchStockPrice = async () => {
+          try {
+            const response = await axios.get(`https://backend.mint-easy.de/data/api/stock-prices/?symbol=${formData.symbol}`);
+            console.log(response);
+            const fetchedStockPrice = response.data.current_price; 
+            setStockPrice(fetchedStockPrice);
+          } catch (error) {
+            console.error("Error fetching stock price:", error);
+          }
+        };
+    
+        
+        if (formData.symbol.trim() !== '') {
+          fetchStockPrice();
+        }
+      }, [formData.symbol]);
+
+
+      useEffect(() => {
+        if (stockPrice !== null && formData.quantity !== null) {
+          const calculatedTotalPrice = stockPrice * formData.quantity;
+          setTotalPrice(calculatedTotalPrice);
+        }
+      }, [stockPrice, formData.quantity]);
     
     
   return (
@@ -179,16 +232,16 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             </div>
 
             <div className="item">
-                <label htmlFor="open_price">Open Price</label>
-                <input
-                    type="number"
-                    name="open_price"
-                    id="open_price"
-                    value={formData.open_price}
-                    onChange={(e) => handleInputChange(e, 'open_price')}
-                />
-                {errors.open_price && <div className="error">{errors.open_price}</div>}
-            </div>
+            <label htmlFor="open_price">Current Price</label>
+            <input
+              type="text"
+              name="open_price"
+              id="open_price"
+              value={stockPrice !== null ? stockPrice.toFixed(2) : ''} 
+              readOnly
+            />
+            {/* {errors.open_price && <div className="error">{errors.open_price}</div>} */}
+          </div>
 
             <div className="item">
                 <label htmlFor="quantity">Quantity</label>
@@ -203,16 +256,15 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             </div>
 
             <div className="item">
-                <label htmlFor="amount">total price</label>
-                <input
-                    type="number"
-                    name="amount"
-                    id="amount"
-                    value={formData.amount}
-                    onChange={(e) => handleInputChange(e, 'amount')}
-                />
-                {errors.amount && <div className="error">{errors.amount}</div>}
-            </div>
+            <label htmlFor="amount">Total Price</label>
+            <input
+              type="text"
+              name="amount"
+              id="amount"
+              value={totalPrice !== null ? totalPrice.toFixed(2) : ''}
+              readOnly
+            />
+          </div>
 
             <div className="item">
                 <label htmlFor="stop_loss">Stop Loss</label>
@@ -271,7 +323,10 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             <button type="submit">Order</button>
         </form>
 
+
+
         </div>
+
         </div>
     
   )

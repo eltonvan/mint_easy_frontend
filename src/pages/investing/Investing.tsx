@@ -67,7 +67,7 @@ const Investing = () => {
             <div className="box box13
             "><StockGenerator /></div>
 
-            <div className="box box14"><StockPortfolio/></div>
+            {/* <div className="box box14"><StockPortfolio/></div> */}
 
             <div className="box box11">
 

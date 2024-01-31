@@ -9,18 +9,22 @@ type StockItemData = {
   symbol: string;
 };
 
-const StockGenerator: React.FC<any> = () => {
+interface ChatResponse {
+  [key: string]: string;
+}
+
+export const StockGenerator: React.FC<any> = () => {
   const [formData, setFormData] = useState<StockItemData>({
     symbol: '',
   });
 
   // State to manage errors
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({
-    ticker: null,
+    symbol: null,
   });
 
   // State to store the response from the server
-  const [answer, setAnswer] = useState<string | null>(null);
+  const [chatResponse, setChatResponse] = useState<string | null>(null);
 
   // Create a mutation using useMutation
   const mutation = useMutation({
@@ -33,8 +37,8 @@ const StockGenerator: React.FC<any> = () => {
         console.log("response", response);
 
         if (response.data) {
-          setAnswer(response.data);
-          console.log("answer", response.data);
+          // Assuming the server response has a structure like { symbol, chat_response }
+          setChatResponse(response.data.chat_response);
         }
       } catch (error) {
         // catch any errors
@@ -58,37 +62,47 @@ const StockGenerator: React.FC<any> = () => {
     }
   };
 
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-  //   setFormData({ ...formData, [field]: e.target.value });
-
-  //   setErrors({ ...errors, [field]: null });
-  // };
+  // Function to handle clearing the response and input field
+  const handleClearResponse = () => {
+    setChatResponse(null);
+    setFormData({ symbol: '' });
+  };
 
   return (
     <div className="stockGenerator">
       <div>
         <form onSubmit={handleSubmit}>
           <div className="item">
-            <label htmlFor="symbol">Ticker</label>
+            <label htmlFor="symbol">Enter stock symbol</label>
             <input
               type="text"
               id="symbol"
               name="symbol"
               value={formData.symbol}
-              onChange={(e) => setFormData({ ...formData,  symbol: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
             />
             
-            <button type="submit" className="btn">send</button>
+            <button type="submit" className="btn" disabled={mutation.isLoading}>
+              {mutation.isLoading ? 'Loading...' : 'Generate stock opinion'}
+            </button>
+
+            <button type="button" className="btn" onClick={handleClearResponse}>
+              Clear Response
+            </button>
 
             {errors.symbol && <div className="error">{errors.symbol}</div>}
           </div>
         </form>
 
         {/* Display result from the server */}
-        {answer && (
+        {chatResponse && (
           <div>
-            <h2>What we think</h2>
-            <div className="answer">{answer}</div>
+            <h2>this is what we think</h2>
+            {chatResponse.split('**').map((item, index) => (
+              <p key={index}>
+                {item.trim() && <span>&bull; {item.trim()}</span>}
+              </p>
+            ))}
           </div>
         )}
       </div>

@@ -1,13 +1,11 @@
 import "./stockOrder.scss"
 import { instance } from '../../axiosInstance';
-import { useNavigate } from 'react-router-dom';
 import { useAuthStateContext } from "../../contexts/AuthStateContext";
 import  { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { updateCSRFToken } from '../../axiosInstance';
 import axios from 'axios';
 import  { useEffect } from 'react';
-import DataTable from "../dataTable/DataTable";
 
 
 
@@ -36,9 +34,8 @@ type StockOrderData = {
 
 export const StockOrder: React.FC<StockOrderProps> = (props) => {
 
-    const {userId, setUserId, msg, setMsg } = useAuthStateContext();
+    const {userId, msg, setMsg } = useAuthStateContext();
 
-    const navigate = useNavigate(); // Declare navigate function from react-router-dom
     const [formData, setFormData] = useState<StockOrderData>({
         day_trading: false,
         long_term_invest : true,
@@ -61,6 +58,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
     const [stockPrice, setStockPrice] = useState<number | null>(null); 
     const [totalPrice, setTotalPrice] = useState<number | null>(null);
     const [profitLossData, setProfitLossData] = useState<any[]>([]); 
+    console.log("Profit/loss data:", profitLossData);
 
 
 
@@ -155,9 +153,9 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
         try {
             await mutation.mutateAsync(); 
       
-          } catch (error) {
+          } catch (error:any) {
             if (error instanceof Error) {
-              setErrors(error.message); 
+              setErrors(error.message? { symbol: error.message } : { symbol: 'An error occurred' }); 
             }
           }
 

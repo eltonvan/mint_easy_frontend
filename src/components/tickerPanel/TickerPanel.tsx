@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -6,16 +6,16 @@ import ChartBox from "../../components/chartBox/ChartBox";
 import "./tickerPanel.scss";
 import { get_stock } from "./util";
 
-interface StockDataItem {
-  id: string;
-  price: number;
-  changePercent: number;
-}
+// interface StockDataItem {
+//   id: string;
+//   price: number;
+//   changePercent: number;
+// }
 
-interface ChartDataPoint {
-  name: string;
-  revenue: number;
-}
+// interface ChartDataPoint {
+//   name: string;
+//   revenue: number;
+// }
 
 interface TickerDataItem {
   id: number;

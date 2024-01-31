@@ -9,9 +9,9 @@ type StockItemData = {
   symbol: string;
 };
 
-interface ChatResponse {
-  [key: string]: string;
-}
+// interface ChatResponse {
+//   [key: string]: string;
+// }
 
 export const StockGenerator: React.FC<any> = () => {
   const [formData, setFormData] = useState<StockItemData>({
@@ -40,7 +40,7 @@ export const StockGenerator: React.FC<any> = () => {
           // Assuming the server response has a structure like { symbol, chat_response }
           setChatResponse(response.data.chat_response);
         }
-      } catch (error) {
+      } catch (error:any) {
         // catch any errors
         console.error("error", error);
         setErrors(error.response?.data || { symbol: 'An error occurred' }); // set the errors
@@ -82,8 +82,8 @@ export const StockGenerator: React.FC<any> = () => {
               onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
             />
             
-            <button type="submit" className="btn" disabled={mutation.isLoading}>
-              {mutation.isLoading ? 'Loading...' : 'Generate stock opinion'}
+            <button type="submit" className="btn">
+              Generate stock opinion
             </button>
 
             <button type="button" className="btn" onClick={handleClearResponse}>

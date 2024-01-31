@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { instance } from '../../axiosInstance';
 import { useAuthStateContext } from "../../contexts/AuthStateContext";
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 // declare the type of the form data
@@ -26,7 +26,7 @@ type LoginFormProps = {
 // set the initial state of the form data
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const {msg, setMsg, isLoggedIn, setIsLoggedIn,showLoginForm, setShowLoginForm, username , setUsername, handleLogin } = useAuthStateContext();
+  const {msg, setMsg,  setIsLoggedIn, setShowLoginForm , setUsername } = useAuthStateContext();
   // const queryClient = useQueryClient();
   const [formData, setFormData] = useState<LoginFormData>({
     username: '',

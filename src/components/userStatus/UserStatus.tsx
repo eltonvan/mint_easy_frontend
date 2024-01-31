@@ -12,8 +12,8 @@ type UserStatusProps = {
 };
 
 const UserStatus: React.FC<UserStatusProps> = (props) => {
-  const { name, user_id, initialSum, profit_loss } = props;
-  const { userId, setUserId, msg, setMsg } = useAuthStateContext();
+  const {  initialSum, profit_loss } = props;
+  const { userId} = useAuthStateContext();
   const [data, setData] = useState({
     initialSum,
     currentSum: initialSum - profit_loss,

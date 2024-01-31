@@ -9,7 +9,7 @@ export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
         return;
       }
       // get the Yaticker type from the protobuf
-      const Yaticker = root.lookupType("yaticker"); 
+      const Yaticker = root?.lookupType("yaticker"); 
 
       // subscribe to the specified stock ticker
       ws.onopen = () => { 

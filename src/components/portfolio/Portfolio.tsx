@@ -2,10 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import protobuf from "protobufjs"; 
 import "./portfolio.scss";
 // import { get_stock } from "./util";
-
+interface StockItem {
+  id: number; 
+}
+ 
 
 export const Portfolio: React.FC = () => {
-  const [stockData, setStockData] = useState<any[]>([]);
+  const [stockData, setStockData] = useState<StockItem[]>([]);
   const stockSymbolsRef = useRef(["MSFT", "TSLA", "AAPL", "AMZN"]);
 
   useEffect(() => {
@@ -17,7 +20,7 @@ export const Portfolio: React.FC = () => {
         return;
       }
 
-      const Yaticker = root.lookupType("yaticker");
+      const Yaticker = root?.lookupType("yaticker");
 
       ws.onopen = () => {
         console.log('connected');

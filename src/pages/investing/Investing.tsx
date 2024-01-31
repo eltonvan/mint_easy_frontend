@@ -1,9 +1,7 @@
 
 import "./investing.scss";
 import News from "../../components/news/News";
-import { Portfolio } from "../../components/portfolio/Portfolio";
 import { StockGenerator } from "../../components/stockGenerator/StockGenerator";// import { TextBox } from "../../components/textBox/TextBox";
-import { StockPortfolio } from "../../components/stockPortfolio/StockPortfolio";
 import StockOrder from "../../components/stockOrder/StockOrder";
 import { useState } from "react";
 import DataTable from "../../components/dataTable/DataTable";

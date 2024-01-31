@@ -13,7 +13,7 @@ const FormPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     let slug = "";
-    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, setMsg, showUserForm, setShowUserForm } = useAuthStateContext();
+    const { showLoginForm, setShowLoginForm, setIsLoggedIn, setUsername, msg, showUserForm, setShowUserForm } = useAuthStateContext();
 
 
 

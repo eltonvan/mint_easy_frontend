@@ -5,9 +5,9 @@ import News from "../../components/news/News";
 import UserStatus from "../../components/userStatus/UserStatus";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import ChartBox from "../../components/chartBox/ChartBox";
-import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue, userStockData } from "../../data";
+// import Slider from "react-slick";
+// import ChartBox from "../../components/chartBox/ChartBox";
+// import { chartBoxProduct, chartBoxUser,chartBoxConversion, chartBoxRevenue, barChartBoxVisit, barChartBoxRevenue, userStockData } from "../../data";
 import TickerPanel from "../../components/tickerPanel/TickerPanel";
 
 

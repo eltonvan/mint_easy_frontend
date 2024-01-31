@@ -18,20 +18,25 @@ import { useAuthStateContext } from "../../contexts/AuthStateContext";
 const Investing = () => {
 
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 70 },
         { field: 'symbol', headerName: 'Symbol', width: 100 },
-        { field: 'buy', headerName: 'Buy', type: 'boolean', width: 100 },
-        { field: 'sell', headerName: 'Sell', type: 'boolean', width: 100 },
-        { field: 'open_price', headerName: 'Open Price', type: 'number', width: 120 },
-        { field: 'close_price', headerName: 'Close Price', type: 'number', width: 120 },
-        { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
+
         { field: 'amount', headerName: 'Amount', type: 'number', width: 100 },
-        { field: 'stop_loss', headerName: 'Stop Loss', type: 'number', width: 120 },
-        { field: 'take_profit', headerName: 'Take Profit', type: 'number', width: 120 },
-        { field: 'day_trading', headerName: 'Day Trading', type: 'boolean', width: 120 },
-        { field: 'long_term_invest', headerName: 'Long Term Invest', type: 'boolean', width: 150 },
+     //   { field: 'buy', headerName: 'Buy', type: 'boolean', width: 100 },
+     //   { field: 'close_price', headerName: 'Close Price', type: 'number', width: 120 },
         { field: 'start_date', headerName: 'Start Date', width: 180 },
+
         { field: 'end_date', headerName: 'End Date', width: 180 },
+      //  { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'long_term_invest', headerName: 'Long Term Invest', type: 'boolean', width: 150 }, 
+        { field: 'day_trading', headerName: 'Day Trading', type: 'boolean', width: 120 },
+
+        { field: 'open_price', headerName: 'Open Price', type: 'number', width: 120 },
+        { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
+       // { field: 'sell', headerName: 'Sell', type: 'boolean', width: 100 },
+       { field: 'profit_loss', headerName: 'Profit Loss', type: 'number', width: 120},
+        { field: 'stop_loss', headerName: 'Stop Loss', type: 'number', width: 120 },
+       // { field: 'take_profit', headerName: 'Take Profit', type: 'number', width: 120 },
+       // { field: 'user_id', headerName: 'User ID', type: 'number', width: 120 }    
       ];
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,18 +44,19 @@ const Investing = () => {
     console.log("Profit/loss data:", profitLossData);
     const { userId } = useAuthStateContext();
 
+
     useEffect(() => {
         const fetchProfitLossData = async () => {
           try {
             const profitLossResponse = await instance.get(`/data/stock-order/${userId}/profit-loss/`);
             setProfitLossData(profitLossResponse.data);
-            console.log("Profit/loss data:", profitLossResponse.data);
+            console.log("Profit/loss data:", profitLossData);
           } catch (error) {
             console.error("Error fetching profit/loss data:", error);
           }
         };
     
-        // Fetch initial profit/loss data
+       
         fetchProfitLossData();
       }, [userId]);
 
@@ -67,7 +73,13 @@ const Investing = () => {
 
              <button onClick={() => setIsModalOpen(true)}>order</button>
              <StockOrder slug="order" isOpen={isModalOpen} setOpen={setIsModalOpen} />
-             <DataTable columns={columns} rows={profitLossData} slug="orders" />
+             {/* <DataTable columns={columns} rows={[profitLossResponse]} slug="orders" /> */}
+             <DataTable columns={columns} rows={[
+  { id: 1, symbol: 'AAPL', amount: 100, day_trading: false, end_date: '2024-12-31', long_term_invest: true, open_price: 150, profit_loss: 50, quantity: 5, start_date: '2022-01-01', stop_loss: 140 },
+  { id: 2, symbol: 'GOOGL', amount: 200, day_trading: true, end_date: '2024-12-31', long_term_invest: false, open_price: 2000, profit_loss: -100, quantity: 2, start_date: '2022-01-01', stop_loss: 1900 },
+  { id: 3, symbol: 'MSFT', amount: 150, day_trading: false, end_date: '2024-12-31', long_term_invest: true, open_price: 300, profit_loss: 75, quantity: 3, start_date: '2022-01-01', stop_loss: 280 },
+]} slug="orders" />
+
 
             </div>
             

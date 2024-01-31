@@ -21,15 +21,12 @@ const columns: GridColDef[] = [
 
 
 export const StockPortfolio = () => {
-    // const [open, setOpen] = useState(false);
     return (
         <div className="stockPortfolio">
             <div className="info">
                 <h1>Portfolio</h1>
-                {/* <button onClick={()=>setOpen(true)}>Add New Product</button> */}
             </div>
             <DataTable slug="stockPortfolio" columns={columns} rows={stockPortfolioItems}/>
-            {/* {open && <Add slug="product" columns={columns} setOpen={setOpen}/>} */}
         </div>
     );
 };

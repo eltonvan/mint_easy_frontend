@@ -12,7 +12,6 @@ import DataTable from "../dataTable/DataTable";
 
 
 type StockOrderData = {
-
     day_trading: boolean;
     long_term_invest : boolean;
     symbol : string;
@@ -68,6 +67,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
 
     // set the initial state of the errors
     const [errors, setErrors] = useState<{ [key: string]: string | null }>({
+    
         day_trading: null,
         long_term_invest : null,
         symbol : null,
@@ -150,7 +150,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
     
         const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        setMsg(''); 
+        
 
         try {
             await mutation.mutateAsync(); 
@@ -218,18 +218,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
                 {errors.symbol && <div className="error">{errors.symbol}</div>}
             </div>
 
-            <div className="item">
-                <label htmlFor="buy">Buy</label>
-                <input
-                    type="checkbox"
-                    name="buy"
-                    id="buy"
-                    defaultChecked={formData.buy}
-                    value={formData.buy.toString()}
-                    onChange={(e) => handleInputChange(e, 'buy')}
-                />
-                {errors.buy && <div className="error">{errors.buy}</div>}
-            </div>
+ 
 
             <div className="item">
             <label htmlFor="open_price">Current Price</label>
@@ -267,9 +256,9 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
           </div>
 
             <div className="item">
-                <label htmlFor="stop_loss">Stop Loss</label>
+                <label htmlFor="stop_loss"></label>
                 <input
-                    type="number"
+                    type="hidden"
                     name="stop_loss"
                     id="stop_loss"
                     value={formData.stop_loss}
@@ -279,9 +268,9 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             </div>
 
             <div className="item">
-                <label htmlFor="take_profit">Take Profit</label>
+                <label htmlFor="take_profit"></label>
                 <input
-                    type="number"
+                    type='hidden'
                     name="take_profit"
                     id="take_profit"
                     value={formData.take_profit}
@@ -291,19 +280,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
 
             </div>  
 
-            {/* <div className="item">
-    <label htmlFor="trading_type">Trading Type</label>
-    <select
-        id="trading_type"
-        name="trading_type"
-        value={formData.long_term_invest ? "long_term_invest" : "day_trading"}
-        onChange={(e) => handleInputChange(e, 'long_term_invest')}
-    >
-        <option value="day_trading">Day Trading</option>
-        <option value="long_term_invest">Long Term Invest</option>
-    </select>
-    {errors.long_term_invest && <div className="error">{errors.long_term_invest}</div>}
-</div> */}
+ 
 
 
             <div className="item">
@@ -315,7 +292,20 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
                     value={formData.user_id}
                     onChange={(e) => handleInputChange(e, 'user_id')}
                 />
-                {errors.user_id && <div className="error">{errors.user_id}</div>}   
+                {errors.user_id && <div className="error">{errors.user_id}</div>} 
+
+                           <div className="item">
+                <label htmlFor="buy"></label>
+                <input
+                    type="hidden"
+                    name="buy"
+                    id="buy"
+                    defaultChecked={formData.buy}
+                    value={formData.buy.toString()}
+                    onChange={(e) => handleInputChange(e, 'buy')}
+                />
+                {errors.buy && <div className="error">{errors.buy}</div>}
+            </div>  
 
             </div>
 

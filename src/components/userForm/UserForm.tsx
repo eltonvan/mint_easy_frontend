@@ -3,9 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import './userForm.scss';
 import { instance , updateCSRFToken } from '../../axiosInstance';
 import { useNavigate } from 'react-router-dom';
-// import Cookies from 'js-cookie';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+
 
 /*
 registration form

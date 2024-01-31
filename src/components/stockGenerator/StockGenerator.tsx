@@ -1,117 +1,99 @@
+// Import necessary libraries and styles
 import "./stockGenerator.scss";
 import React, { useState } from 'react';
-import axios from 'axios';
+import instance from "../../axiosInstance";
+import { useMutation } from '@tanstack/react-query';
+import { updateCSRFToken } from '../../axiosInstance';
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY as string;
+type StockItemData = {
+  symbol: string;
+};
 
-interface StockItem {
-  name: string;
-  ticker: string;
-  reason: string;
-}
+const StockGenerator: React.FC<any> = () => {
+  const [formData, setFormData] = useState<StockItemData>({
+    symbol: '',
+  });
 
-// export const StockGenerator: React.FC = () => {
-  // const defaultPrompt = "provide a list of 10 none tech stocks for my portfolio. the list must contain the name, ticker, and reason for recommendation. \n\n";
+  // State to manage errors
+  const [errors, setErrors] = useState<{ [key: string]: string | null }>({
+    ticker: null,
+  });
 
-  // const [prompt, setPrompt] = useState<string>(defaultPrompt);
-  // const [result, setResult] = useState<StockItem[] | null>(null);
-  // const [error, setError] = useState<string | null>(null);
+  // State to store the response from the server
+  const [answer, setAnswer] = useState<string | null>(null);
 
-  // const handlePromptChange = (event: React.FormEvent<HTMLInputElement>) => {
-  //   setPrompt(event.currentTarget.value);
+  // Create a mutation using useMutation
+  const mutation = useMutation({
+    mutationFn: async () => {
+      updateCSRFToken(); 
+      console.log("form data", formData);
+
+      try {
+        const response = await instance.post('/data/api/retrieve-chat-response/', formData);
+        console.log("response", response);
+
+        if (response.data) {
+          setAnswer(response.data);
+          console.log("answer", response.data);
+        }
+      } catch (error) {
+        // catch any errors
+        console.error("error", error);
+        setErrors(error.response?.data || { symbol: 'An error occurred' }); // set the errors
+        throw error;
+      }
+    },
+  });
+
+  // Function to handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setErrors({ symbol: null });
+
+    try {
+      await mutation.mutateAsync();  // execution is paused until the promise is resolved
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+  //   setFormData({ ...formData, [field]: e.target.value });
+
+  //   setErrors({ ...errors, [field]: null });
   // };
-
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.post(
-  //       "https://api.openai.com/v1/chat/completions",
-  //       {
-  //         // ... (your existing payload)
-  //       },
-  //       { headers: { 'Authorization': `Bearer ${OPENAI_API_KEY}` } }
-  //     );
-  
-  //     if (
-  //       response.data &&
-  //       response.data.choices &&
-  //       response.data.choices.length > 0
-  //     ) {
-  //       // Directly use the response text as a string
-  //       const resultText = response.data.choices[0].text;
-  //       setResult([resultText]);
-  //       setError(null);
-  //     } else {
-  //       console.error("Invalid response data structure");
-  //       setResult(null);
-  //       setError("Invalid response data structure");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setResult(null);
-  //     setError(
-  //       "An error occurred. Please check your internet connection or try again later."
-  //     );
-  //   }
-  // };
-  
-  
-  
-
-  // return (
-  //   <div className="container">
-  //     <form onSubmit={handleSubmit}>
-  //       <label htmlFor="prompt">
-          
-  //         <input type="hidden" id="prompt" name="prompt" value={prompt} onChange={handlePromptChange} />
-  //       </label>
-  //       <button type="submit">Generate a portfolio</button>
-        
-  //     </form>
-  //     {result && (
-  //       <table>
-  //         <thead>
-  //           <tr>
-  //             <th>Name</th>
-  //             <th>Ticker</th>
-  //             <th>Reason</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>
-  //           {result.map((stock: StockItem, index: number) => (
-  //             <tr key={index}>
-  //               <td>{stock.name}</td>
-  //               <td>{stock.ticker}</td>
-  //               <td>{stock.reason}</td>
-  //             </tr>
-  //           ))}
-  //         </tbody>
-  //       </table>
-  //     )}
-  //     {error && <p style={{ color: 'red' }}>{error}</p>}
-  //   </div>
-  // );
-
-export const StockGenerator: React.FC = () => {
 
   return (
-    <div>
-          <button className="btn">Generate a portfolio</button>
-          <br/>
-          <br/>
-    <div><h2> Apple stock recommendation</h2></div>
+    <div className="stockGenerator">
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className="item">
+            <label htmlFor="symbol">Ticker</label>
+            <input
+              type="text"
+              id="symbol"
+              name="symbol"
+              value={formData.symbol}
+              onChange={(e) => setFormData({ ...formData,  symbol: e.target.value })}
+            />
+            
+            <button type="submit" className="btn">send</button>
 
-    <br/>
-    <ul>
-<li>A time series analysis suggests a temporary price correction of up to 10% in the near term for Apple stock.</li>
-<li>Positive corporate figures and analyst estimates could prompt a rebound to the long-term target of $200.</li>
-<li>A potential entry point could be around $170.</li>
-<li>This analysis is not investment advice and individual circumstances should be considered.</li>
-</ul>
+            {errors.symbol && <div className="error">{errors.symbol}</div>}
+          </div>
+        </form>
 
-  
+        {/* Display result from the server */}
+        {answer && (
+          <div>
+            <h2>What we think</h2>
+            <div className="answer">{answer}</div>
+          </div>
+        )}
+      </div>
     </div>
-    )
+  );
 };
 
 export default StockGenerator;

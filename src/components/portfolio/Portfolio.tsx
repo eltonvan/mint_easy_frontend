@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import protobuf from "protobufjs"; 
 import "./portfolio.scss";
-// import { get_stock } from "./util";
-interface StockItem {
-  id: number; 
-}
+
  
 
 export const Portfolio: React.FC = () => {
@@ -36,11 +33,11 @@ export const Portfolio: React.FC = () => {
       ws.onmessage = (event) => {
         try {
           const messageData = event.data;
-          const next = Yaticker.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
+          const next: any = Yaticker?.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
           setStockData((prevData) => {
             console.log("next", next)
-            const existingIndex = prevData.findIndex((item) => item.id === next.id);
+            const existingIndex = prevData.findIndex((item) => item.id === next?.id);
             if (existingIndex === -1) {
               return [...prevData, next];
             } else {

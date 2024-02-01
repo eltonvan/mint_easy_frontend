@@ -25,7 +25,7 @@ export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
         try {
           const messageData = event.data;
           // decode the binary data, set the current state, and loop through the data
-          const next = Yaticker?.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
+          const next: any = Yaticker?.decode(new Uint8Array(atob(messageData).split('').map(c => c.charCodeAt(0))));
           
           setStockData((prevData: any) => {
             let exists = false;

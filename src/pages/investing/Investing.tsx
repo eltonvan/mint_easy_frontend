@@ -5,7 +5,8 @@ import { StockGenerator } from "../../components/stockGenerator/StockGenerator";
 import StockOrder from "../../components/stockOrder/StockOrder";
 import { useState } from "react";
 import DataTable from "../../components/dataTable/DataTable";
-import { GridColDef } from '@material-ui/data-grid';
+import { GridColDef } from "@mui/x-data-grid";
+
 import { useEffect } from "react";
 import instance from "../../axiosInstance";
 import { useAuthStateContext } from "../../contexts/AuthStateContext";

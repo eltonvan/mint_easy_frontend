@@ -4,11 +4,13 @@ import { useAuthStateContext } from '../../contexts/AuthStateContext';
 import { instance, updateCSRFToken } from '../../axiosInstance';
 import { useMutation } from '@tanstack/react-query';
 
+
+
 type UserStatusProps = {
-  name: string;
-  user_id: number;
-  initialSum: number;
-  profit_loss: number;
+  name?: string;
+  user_id?: number;
+  initialSum?: number;
+  profit_loss?: number;
 };
 
 const UserStatus: React.FC<UserStatusProps> = (props) => {
@@ -16,7 +18,7 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
   const { userId} = useAuthStateContext();
   const [data, setData] = useState({
     initialSum,
-    currentSum: initialSum - profit_loss,
+    currentSum: initialSum !== undefined && profit_loss !== undefined ? initialSum - profit_loss : 0,
     balance: 0,
     stock_amount: 0,
     profit_loss: 0,

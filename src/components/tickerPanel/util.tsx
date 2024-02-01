@@ -1,6 +1,8 @@
 // Define the get_stock function
 import protobuf from "protobufjs";
 
+
+
 export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
 
     protobuf.load('/YPricingData.proto', (error, root) => {

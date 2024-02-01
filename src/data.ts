@@ -11,12 +11,6 @@ export const menu = [
       },
 
       {
-        id: 2,
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: "user.svg",
-      },
-      {
         id: 3,
         title: "Trading",
         url: "/trading",

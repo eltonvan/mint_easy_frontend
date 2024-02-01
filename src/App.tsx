@@ -1,5 +1,4 @@
 import Home from "./pages/home/Home";
-import Dashboard from "./pages/dashboard/Dashboard";
 import { WatchList } from "./pages/watchList/WatchList";
 import { createBrowserRouter, RouterProvider, Outlet, useRoutes } from "react-router-dom";
 
@@ -39,10 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
       path: '/',
       element: <Home />,
     },
-    {
-      path: "/dashboard",
-      element: <ProtectedRoute element={<Dashboard />} />,
-    },
+
   ]);
 
   // Check if the current route is the home page
@@ -97,10 +93,7 @@ const router = createBrowserRouter([ // create the router
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/dashboard",
-        element: <ProtectedRoute element={<Dashboard />} />,
-      },
+
       {
         path: "/trading",
         element: <ProtectedRoute element={<Trading />} />,

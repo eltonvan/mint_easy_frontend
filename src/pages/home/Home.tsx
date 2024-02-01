@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="box box2">
-        <TextBox title={pageTitle} subtitle={pageSubtitle} text={pageText} />{" "}
+        <TextBox pageTitle={pageTitle} pageSubtitle={pageSubtitle} pageText={pageText} />{" "}
       </div>
     </div>
   );

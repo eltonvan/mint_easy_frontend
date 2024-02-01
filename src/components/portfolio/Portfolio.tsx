@@ -8,7 +8,7 @@ interface StockItem {
  
 
 export const Portfolio: React.FC = () => {
-  const [stockData, setStockData] = useState<StockItem[]>([]);
+  const [stockData, setStockData] = useState<any[]>([]);
   const stockSymbolsRef = useRef(["MSFT", "TSLA", "AAPL", "AMZN"]);
 
   useEffect(() => {

@@ -21,9 +21,9 @@ const TextBox = (props: Props) => {
   // main homepage component. main navigation and slogan
   return (
     <div>
-      <div className="pageTitle"><h1>{props.title}</h1></div>
-      <div className="pageSubtitle"><h1>{props.subtitle}</h1></div>
-      <div className="pageText">{props.text}</div>
+      <div className="pageTitle"><h1>{props.pageTitle}</h1></div>
+      <div className="pageSubtitle"><h1>{props.pageSubtitle}</h1></div>
+      <div className="pageText">{props.pageText}</div>
       <div className="btnPanel">
       <Link to="/invest">
             <div className="btn">I want to invest</div>

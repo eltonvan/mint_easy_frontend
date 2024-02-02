@@ -1,6 +1,6 @@
-import './news.scss'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import "./news.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface NewsItem {
   title: string;
@@ -19,8 +19,11 @@ const News: React.FC<NewsProps> = ({ interval }) => {
   useEffect(() => {
     const fetchNews = () => {
       axios
-      .get(`https://newsapi.org/v2/everything?q=finance&apiKey=${import.meta.env.VITE_REACT_APP_NEWS_API_KEY}`)        .then((response) => setNews(response.data.articles))
-        .catch((error) => console.error('Error fetching news:', error));
+        .get(
+          `https://newsapi.org/v2/everything?q=finance&apiKey=${import.meta.env.VITE_REACT_APP_NEWS_API_KEY}`,
+        )
+        .then((response) => setNews(response.data.articles))
+        .catch((error) => console.error("Error fetching news:", error));
     };
 
     fetchNews();
@@ -46,8 +49,8 @@ const News: React.FC<NewsProps> = ({ interval }) => {
 
   return (
     <div>
-      <h2>{currentNews?.title || 'No Title'}</h2>
-      <p>{currentNews?.description || 'No Description'}</p>
+      <h2>{currentNews?.title || "No Title"}</h2>
+      <p>{currentNews?.description || "No Description"}</p>
       <a href={currentNews?.url} target="_blank" rel="noopener noreferrer">
         Read more
       </a>
@@ -56,8 +59,3 @@ const News: React.FC<NewsProps> = ({ interval }) => {
 };
 
 export default News;
-
-
-
-
-

@@ -53,7 +53,7 @@ const Investing = () => {
     const fetchProfitLossData = async () => {
       try {
         const profitLossResponse = await instance.get(
-          `/data/stock-order/${userId}/profit-loss/`
+          `/data/stock-order/${userId}/profit-loss/`,
         );
         setProfitLossData(profitLossResponse.data);
         console.log("Profit/loss data:", profitLossData);

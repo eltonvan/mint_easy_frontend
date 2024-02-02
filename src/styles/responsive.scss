@@ -5,31 +5,31 @@ $xl: 1200px;
 $xxl: 1600px;
 
 @mixin sm {
-    @media (max-width: ($sm)) {
-        @content;
-    }
+  @media (max-width: ($sm)) {
+    @content;
+  }
 }
 
 @mixin md {
-    @media (max-width: ($md)) {
-        @content;
-    }
+  @media (max-width: ($md)) {
+    @content;
+  }
 }
 
 @mixin lg {
-    @media (max-width: ($lg)) {
-        @content;
-    }
+  @media (max-width: ($lg)) {
+    @content;
+  }
 }
 
 @mixin xl {
-    @media (max-width: ($xl)) {
-        @content;
-    }
+  @media (max-width: ($xl)) {
+    @content;
+  }
 }
 
 @mixin xxl {
-    @media (max-width: ($xxl)) {
-        @content;
-    }
+  @media (max-width: ($xxl)) {
+    @content;
+  }
 }

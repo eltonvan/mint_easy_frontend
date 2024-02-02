@@ -1,6 +1,11 @@
 import Home from "./pages/home/Home";
 import { WatchList } from "./pages/watchList/WatchList";
-import { createBrowserRouter, RouterProvider, Outlet, useRoutes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  useRoutes,
+} from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
 import Trading from "./pages/trading/Trading";
@@ -16,15 +21,11 @@ import CookieConsent from "react-cookie-consent";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 // import LoginForm from "./components/loginForm/LoginForm";
 
-
-
-
 /*
 the main component of the application
 it renders the navbar, the menu, main section and the footer 
 it also renders the routes based on the url
 */
-
 
 const queryClient = new QueryClient(); // create a new query client instance from react-query
 
@@ -32,13 +33,13 @@ interface LayoutProps {
   showMenu: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to render the navbar, menu, main section and the footer
-  const routes = useRoutes([ 
+const Layout: React.FC<LayoutProps> = ({ showMenu }) => {
+  // Layout component to render the navbar, menu, main section and the footer
+  const routes = useRoutes([
     {
-      path: '/',
+      path: "/",
       element: <Home />,
     },
-
   ]);
 
   // Check if the current route is the home page
@@ -57,34 +58,35 @@ const Layout: React.FC<LayoutProps> = ({ showMenu }) => { // Layout component to
     <div className="main">
       {/* Wrap the application with the QueryClientProvider */}
       <QueryClientProvider client={queryClient}>
-      
         <Navbar />
-        
+
         <div className="container">
           {renderMenu}
-          <div className="contentContainer">
-            {routes || <Outlet />}
-          </div>
+          <div className="contentContainer">{routes || <Outlet />}</div>
           <CookieConsent
-  location="bottom"
-  buttonText="hell ye!!"
-  cookieName="myconsent"
-  style={{ background:"#222b3c" }}
-  buttonStyle={{ color: "#4e503b", fontSize: "13px", background: "#" }}
-  expires={150}
->
-  This website uses cookies to enhance the user experience.{"#dddddd"}
-  <span style={{ fontSize: "10px" }}></span>
-</CookieConsent>
+            location="bottom"
+            buttonText="hell ye!!"
+            cookieName="myconsent"
+            style={{ background: "#222b3c" }}
+            buttonStyle={{
+              color: "#4e503b",
+              fontSize: "13px",
+              background: "#",
+            }}
+            expires={150}
+          >
+            This website uses cookies to enhance the user experience.{"#dddddd"}
+            <span style={{ fontSize: "10px" }}></span>
+          </CookieConsent>
         </div>
         <Footer />
-        
       </QueryClientProvider>
     </div>
   );
 };
 
-const router = createBrowserRouter([ // create the router
+const router = createBrowserRouter([
+  // create the router
   {
     path: "/",
     element: <Layout showMenu={true} />,
@@ -116,9 +118,7 @@ const router = createBrowserRouter([ // create the router
         path: "/contact",
         element: <Home />,
       },
-      { path: "/subscribe",
-       element: <Home />, 
-      },
+      { path: "/subscribe", element: <Home /> },
 
       {
         path: "/reset-password/:uid/:token",
@@ -128,7 +128,7 @@ const router = createBrowserRouter([ // create the router
         path: "/confirm-email/:key",
         element: <FormPage />,
       },
-      { 
+      {
         path: "/login",
         element: <FormPage />,
       },
@@ -136,10 +136,9 @@ const router = createBrowserRouter([ // create the router
         path: "/signup",
         element: <FormPage />,
       },
-      
     ],
   },
- // dont show menu on login and signup and form pages
+  // dont show menu on login and signup and form pages
   {
     path: "/",
     element: <Layout showMenu={false} />,
@@ -166,9 +165,10 @@ const router = createBrowserRouter([ // create the router
 
 function App() {
   return (
-  <AuthStateProvider>
-    <RouterProvider router={router} />
-    </AuthStateProvider>);
+    <AuthStateProvider>
+      <RouterProvider router={router} />
+    </AuthStateProvider>
+  );
 }
 
 export default App;

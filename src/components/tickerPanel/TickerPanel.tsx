@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -28,7 +28,7 @@ const TickerPanel = () => {
     autoplay: true,
     autoplaySpeed: 0,
     speed: 10000,
-    cssEase: 'linear',
+    cssEase: "linear",
     pauseOnHover: true,
     adaptiveHeight: true,
     centerMode: true,
@@ -37,16 +37,18 @@ const TickerPanel = () => {
   };
 
   const [stockData, setStockData] = useState<any[]>([]);
-  const [initialChartDataMap, setInitialChartDataMap] = useState<{ [id: string]: { name: string; revenue: number }[] }>({});
+  const [initialChartDataMap, setInitialChartDataMap] = useState<{
+    [id: string]: { name: string; revenue: number }[];
+  }>({});
   const [tickerData, setTickerData] = useState<TickerDataItem[]>([]);
 
   useEffect(() => {
-    const ws = new WebSocket('wss://streamer.finance.yahoo.com'); // connect to the WebSocket
-    get_stock(stockSymbols, setStockData, ws)
+    const ws = new WebSocket("wss://streamer.finance.yahoo.com"); // connect to the WebSocket
+    get_stock(stockSymbols, setStockData, ws);
     return () => {
       ws.close();
     };
-  }, []); 
+  }, []);
 
   useEffect(() => {
     // console.log("stockData", stockData);
@@ -55,10 +57,14 @@ const TickerPanel = () => {
       const id = item.id;
       const existingInitialChartData = initialChartDataMap[id];
 
-      const randomChartData = existingInitialChartData || generateRandomChartData();
+      const randomChartData =
+        existingInitialChartData || generateRandomChartData();
 
       if (!existingInitialChartData) {
-        setInitialChartDataMap(prevMap => ({ ...prevMap, [id]: randomChartData }));
+        setInitialChartDataMap((prevMap) => ({
+          ...prevMap,
+          [id]: randomChartData,
+        }));
       }
 
       return {
@@ -77,7 +83,7 @@ const TickerPanel = () => {
 
   const generateRandomChartData = (): { name: string; revenue: number }[] => {
     // Generate and return random chart data
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return daysOfWeek.map((day) => ({
       name: day,
       revenue: Math.floor(Math.random() * (1800 - 70 + 1)) + 10,
@@ -85,12 +91,14 @@ const TickerPanel = () => {
   };
 
   return (
-    <Slider {...settings}>        
+    <Slider {...settings}>
       {tickerData.map(({ id, ...otherProps }) => (
-        <div key={id} className="chartBoxContainer"><ChartBox {...otherProps} /></div>
+        <div key={id} className="chartBoxContainer">
+          <ChartBox {...otherProps} />
+        </div>
       ))}
-    </Slider> 
+    </Slider>
   );
-}
+};
 
 export default TickerPanel;

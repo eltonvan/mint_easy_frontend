@@ -2,43 +2,39 @@
 @import "../../styles/responsive.scss";
 
 .menu {
-
-.item{
-
+  .item {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
 
-    .title{
-        font-size: 12px;
-        font-weight: 200;
-        color: $soft-color;
-        text-transform: uppercase;
+    .title {
+      font-size: 12px;
+      font-weight: 200;
+      color: $soft-color;
+      text-transform: uppercase;
 
-        @include lg{
-            display:none;
-        }
+      @include lg {
+        display: none;
+      }
     }
 
-    .listItem{
-        display: flex;
-        align-items: center;
-        gap: 10px;  
-        padding: 10px;
-        border-radius: 5px;
+    .listItem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 5px;
 
-        &:hover{
-            background-color: $soft-bg;
-        }
+      &:hover {
+        background-color: $soft-bg;
+      }
 
-        .listItemTitle{
-            @include lg{
-            display:none;
-            }
+      .listItemTitle {
+        @include lg {
+          display: none;
         }
+      }
     }
-}
-
-
+  }
 }

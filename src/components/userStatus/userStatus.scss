@@ -12,16 +12,12 @@
     font-size: 1.3rem;
     font-weight: 700;
     margin-top: 10px;
-    
-    
   }
-
 
   .number {
     font-size: 2.2rem;
     font-weight: 700;
     margin-top: 5px;
-
   }
 
   .topRow {
@@ -29,11 +25,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px none $dark-color; 
+    border: 1px none $dark-color;
     border-radius: 10px;
   }
-
-
 
   .bottomRow {
     grid-row: 3;
@@ -45,9 +39,9 @@
   .boxInfo {
     display: flex;
     flex-direction: column;
-    justify-content: center;  // Center vertically
-    align-items: center;      // Center horizontally
-    text-align: center;       // Center text
+    justify-content: center; // Center vertically
+    align-items: center; // Center horizontally
+    text-align: center; // Center text
 
     // Add padding for spacing between text and number
     padding: 10px;
@@ -57,30 +51,32 @@
   }
 
   .boxName {
- }
+  }
 
   .boxAvailable {
-    border: 1px dashed $dark-color; 
-    border-radius: 10px;  }
+    border: 1px dashed $dark-color;
+    border-radius: 10px;
+  }
 
   .boxInvested {
-    border: 1px dashed $dark-color; 
-    border-radius: 10px;  }
+    border: 1px dashed $dark-color;
+    border-radius: 10px;
+  }
 
   .boxProfitLoss {
     border: 1px dashed $dark-color;
     border-radius: 10px;
-  
+
     &.green {
       .number {
         color: green;
       }
     }
-  
+
     &.red {
       .number {
         color: red;
       }
     }
-    }
+  }
 }

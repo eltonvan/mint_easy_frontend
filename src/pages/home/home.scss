@@ -1,133 +1,119 @@
 @import "../../styles/variables.scss";
 @import "../../styles/responsive.scss";
 
+.home {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: (minmax(180px, auto));
+  grid-auto-flow: dense;
 
-.home{
+  @include xl {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .box {
+    padding: 20px;
+    border: 1px solid $soft-bg;
+    border-radius: 10px;
+  }
+
+  .box1 {
+    grid-column: span 1;
+    grid-row: span 3;
+  }
+
+  .box2 {
+    grid-column: span 4;
+    grid-row: span 3;
+
+    background-color: $soft-color;
 
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(4,1fr);
-    grid-auto-rows: (minmax(180px,auto));
-    grid-auto-flow: dense;
+    grid-template-rows: auto auto auto auto;
 
-    @include xl{
-        grid-template-columns: repeat(3,1fr);
+    .pageTitle {
+      color: $dark-color;
+      font-size: clamp(24px, 2vw, 200px);
     }
 
-    @include lg{
-        grid-template-columns: repeat(2,1fr);
+    .pageSubtitle {
+      color: $cooler-color;
+      font-size: clamp(16px, 5vw, 22px);
+      margin-bottom: 20px;
     }
 
-    @include md{
-        grid-template-columns: repeat(1,1fr);
+    .pageText {
+      color: $dark-color;
+      font-size: clamp(12px, 5vw, 24px);
+      color: dimgrey;
     }
-    .box{
-        
-        padding: 20px;
-        border: 1px solid $soft-bg;
+
+    .btnPanel {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+
+      @include md {
+        flex-direction: column;
+      }
+      @include sm {
+        flex-direction: column;
+      }
+      @include lg {
+        flex-direction: column;
+      }
+
+      .btn {
+        margin-top: 80px;
+        background-color: $dark-color;
+        color: $soft-color;
+        padding: 50px 80px;
         border-radius: 10px;
-    }
+        font-size: 26px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
-    .box1{
-        grid-column: span 1;
-        grid-row: span 3;
-    }
-
-    .box2{
-        grid-column: span 4;
-        grid-row: span 3;
-         
-        background-color:$soft-color;
-
-        display: grid; 
-        grid-template-rows: auto auto auto auto;
-        
-        .pageTitle{
-            color: $dark-color;
-            font-size: clamp(24px, 2vw, 200px);
-
+        @include md {
+          margin-top: 40px;
+        }
+        @include sm {
+          margin-top: 40px;
+        }
+        @include lg {
+          margin-top: 40px;
         }
 
-        .pageSubtitle{
-            color: $cooler-color;
-            font-size: clamp(16px, 5vw, 22px);
-            margin-bottom: 20px;
-
+        &:hover {
+          background-color: $soft-color;
+          color: $dark-color;
+          border: 5px solid $dark-color;
         }
-
-        .pageText{
-
-            color: $dark-color;
-            font-size: clamp(12px, 5vw, 24px);
-            color:dimgrey
-
-        }
-
-        .btnPanel{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        
-            @include md{
-                flex-direction: column;
-            }
-            @include sm{
-                flex-direction: column;
-            }
-            @include lg{
-                flex-direction: column;
-            }
-
-            .btn{
-                
-                margin-top: 80px;
-                background-color: $dark-color;
-                color: $soft-color;
-                padding: 50px 80px;
-                border-radius: 10px;
-                font-size: 26px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease-in-out;
-
-                @include md{
-                    margin-top: 40px;
-                }
-                @include sm{
-                    margin-top: 40px;
-                }
-                @include lg{
-                    margin-top: 40px;
-                }
-    
-                &:hover{
-                    background-color: $soft-color;
-                    color: $dark-color;
-                    border : 5px solid $dark-color;
-                }
-
-        
-            }
-
-        
-        }
+      }
     }
+  }
 
-    .box4{
-        grid-column: span 1;
-        grid-row: span 3;
+  .box4 {
+    grid-column: span 1;
+    grid-row: span 3;
+  }
+
+  .box7 {
+    grid-column: span 2;
+    grid-row: span 2;
+
+    @include md {
+      display: none;
     }
-
-    .box7{
-        grid-column: span 2;
-        grid-row: span 2;
-
-        @include md{
-            display: none;
-        }
-    }
-
+  }
 }
-

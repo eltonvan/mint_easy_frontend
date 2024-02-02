@@ -1,16 +1,10 @@
-# Frontend  mint easy
+# Frontend mint easy
 
 ## Project setup
 
+1.clone the project
 
-
-
-
-1.clone the project 
-
-
-
-2.Node js is the runtime environment for javascript 
+2.Node js is the runtime environment for javascript
 
 install node.js from https://nodejs.org/en/download/
 
@@ -19,23 +13,25 @@ or type in terminal
 ```bash
 sudo apt install nodejs
 ```
+
 3.check version
 
 ```bash
 node -v
 ```
 
-install npm (node package manager) 
+install npm (node package manager)
 
 ```bash
 sudo apt install npm
 ```
 
-install scss 
+install scss
 
 ```bash
 npm install -g sass
 ```
+
 navigate to the project folder to
 install dependencies
 
@@ -59,7 +55,6 @@ probably:
 
 http://localhost:5173/
 
-
 ### creating the build
 
 to compile before deployment
@@ -67,4 +62,5 @@ to compile before deployment
 ```
 npm run build
 ```
+
 if there are any errors, fix them and try again.

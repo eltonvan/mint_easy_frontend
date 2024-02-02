@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   react-app:
     image: react-app-image

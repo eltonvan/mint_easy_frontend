@@ -18,7 +18,7 @@ export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
       ws.send(
         JSON.stringify({
           subscribe: stocks,
-        })
+        }),
       );
     };
 
@@ -33,8 +33,8 @@ export const get_stock = (stocks: String[], setStockData: any, ws: any) => {
           new Uint8Array(
             atob(messageData)
               .split("")
-              .map((c) => c.charCodeAt(0))
-          )
+              .map((c) => c.charCodeAt(0)),
+          ),
         );
 
         setStockData((prevData: any) => {

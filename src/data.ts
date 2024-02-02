@@ -689,122 +689,116 @@ export const singleProduct = {
 
 export const userStockData = [
   {
-    id:1,
+    id: 1,
     color: "black",
     icon: "/conversionIcon.svg",
     title: "TSLA",
     number: 45.6,
     percentage: 23.4,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
     ],
-    
   },
 
-  
-
   {
-    id:2,
+    id: 2,
     color: "black",
     icon: "/conversionIcon.svg",
     title: "AAPL",
     number: 45.6,
     percentage: 23.4,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
-    ],  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
+    ],
   },
-  
+
   {
-    id:3,
+    id: 3,
     color: "black",
     icon: "/conversionIcon.svg",
     title: "GOOG",
     number: 45.6,
     percentage: 23.4,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
     ],
   },
   {
-    id:4,
+    id: 4,
     color: "green",
     icon: "/conversionIcon.svg",
     title: "GGFD",
     number: 2245.6,
     percentage: -13.14,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
     ],
   },
   {
-    id:5,
+    id: 5,
     color: "blue",
     icon: "/conversionIcon.svg",
     title: "YAHOO",
     number: 335.6,
     percentage: 33.5,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
     ],
   },
   {
-    id:6,
+    id: 6,
     color: "red",
     icon: "/conversionIcon.svg",
     title: "MSFT",
     number: 425.6,
     percentage: -13.4,
     dataKey: "revenue",
-    chartData: [  
-    { name: "Sun", revenue: 400 },
-    { name: "Mon", revenue: 600 },
-    { name: "Tue", revenue: 500 },
-    { name: "Wed", revenue: 700 },
-    { name: "Thu", revenue: 400 },
-    { name: "Fri", revenue: 500 },
-    { name: "Sat", revenue: 450 },  
+    chartData: [
+      { name: "Sun", revenue: 400 },
+      { name: "Mon", revenue: 600 },
+      { name: "Tue", revenue: 500 },
+      { name: "Wed", revenue: 700 },
+      { name: "Thu", revenue: 400 },
+      { name: "Fri", revenue: 500 },
+      { name: "Sat", revenue: 450 },
     ],
   },
-
 ];
-
-
 
 export const stockPortfolioItems = [
   {
@@ -881,4 +875,3 @@ export const stockPortfolioItems = [
     short: 250.2,
   },
 ];
-  

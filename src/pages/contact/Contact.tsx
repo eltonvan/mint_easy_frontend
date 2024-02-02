@@ -1,7 +1,5 @@
-import "./contact.scss"
+import "./contact.scss";
 
 export const Contact = () => {
-  return (
-    <div>Contact</div>
-  )
-}
+  return <div>Contact</div>;
+};

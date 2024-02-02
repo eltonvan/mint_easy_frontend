@@ -84,7 +84,7 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
             {formatNumberWithSeparator(data.stock_amount)}$
           </div>
         </div>
-{/* |        conditional formatting for profit/loss */}
+        {/* |        conditional formatting for profit/loss */}
         <div className={`boxInfo boxProfitLoss ${isProfit ? "green" : "red"}`}>
           Your profit/loss
           <div className="number">

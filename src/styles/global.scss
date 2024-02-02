@@ -1,7 +1,8 @@
 @import "./variables.scss";
 @import "./responsive.scss";
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   background-color: $main-bg; // Set the background color to match your design
@@ -22,9 +23,9 @@ a {
   font-family: "Inter", sans-serif;
   background-color: $main-bg;
   color: $main-color;
-  min-height: 100vh;  // Set minimum height to 100% of the viewport height
-  display: flex;      // Use flexbox to control vertical alignment
-  flex-direction: column; 
+  min-height: 100vh; // Set minimum height to 100% of the viewport height
+  display: flex; // Use flexbox to control vertical alignment
+  flex-direction: column;
 }
 
 .container {
@@ -36,7 +37,7 @@ a {
   padding: 5px 20px;
   border-right: 2px solid $soft-bg;
 
-  @include lg{
+  @include lg {
     width: max-content;
   }
 }

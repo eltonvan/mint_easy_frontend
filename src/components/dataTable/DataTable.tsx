@@ -1,9 +1,4 @@
- 
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbar,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
 
@@ -14,9 +9,7 @@ type Props = {
 };
 
 const DataTable = (props: Props) => {
-
-
-//  const queryClient = useQueryClient();
+  //  const queryClient = useQueryClient();
   // const mutation = useMutation({
   //   mutationFn: (id: number) => {
   //     return fetch(`http://localhost:8800/api/${props.slug}/${id}`, {
@@ -31,9 +24,7 @@ const DataTable = (props: Props) => {
   // const handleDelete = () => { // id: number
   //   //delete the item
   //   // mutation.mutate(id)
-    
 
-    
   // };
 
   const actionColumn: GridColDef = {
@@ -51,7 +42,7 @@ const DataTable = (props: Props) => {
           </div>
         </div>
       );
-    }, 
+    },
   };
 
   return (

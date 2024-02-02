@@ -1,9 +1,9 @@
 // Import necessary libraries and styles
 import "./stockGenerator.scss";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import instance from "../../axiosInstance";
-import { useMutation } from '@tanstack/react-query';
-import { updateCSRFToken } from '../../axiosInstance';
+import { useMutation } from "@tanstack/react-query";
+import { updateCSRFToken } from "../../axiosInstance";
 
 type StockItemData = {
   symbol: string;
@@ -15,7 +15,7 @@ type StockItemData = {
 
 export const StockGenerator: React.FC<any> = () => {
   const [formData, setFormData] = useState<StockItemData>({
-    symbol: '',
+    symbol: "",
   });
 
   // State to manage errors
@@ -29,21 +29,24 @@ export const StockGenerator: React.FC<any> = () => {
   // Create a mutation using useMutation
   const mutation = useMutation({
     mutationFn: async () => {
-      updateCSRFToken(); 
+      updateCSRFToken();
       console.log("form data", formData);
 
       try {
-        const response = await instance.post('/data/api/retrieve-chat-response/', formData);
+        const response = await instance.post(
+          "/data/api/retrieve-chat-response/",
+          formData,
+        );
         console.log("response", response);
 
         if (response.data) {
           // Assuming the server response has a structure like { symbol, chat_response }
           setChatResponse(response.data.chat_response);
         }
-      } catch (error:any) {
+      } catch (error: any) {
         // catch any errors
         console.error("error", error);
-        setErrors(error.response?.data || { symbol: 'An error occurred' }); // set the errors
+        setErrors(error.response?.data || { symbol: "An error occurred" }); // set the errors
         throw error;
       }
     },
@@ -56,16 +59,16 @@ export const StockGenerator: React.FC<any> = () => {
     setErrors({ symbol: null });
 
     try {
-      await mutation.mutateAsync();  // execution is paused until the promise is resolved
+      await mutation.mutateAsync(); // execution is paused until the promise is resolved
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   // Function to handle clearing the response and input field
   const handleClearResponse = () => {
     setChatResponse(null);
-    setFormData({ symbol: '' });
+    setFormData({ symbol: "" });
   };
 
   return (
@@ -79,9 +82,11 @@ export const StockGenerator: React.FC<any> = () => {
               id="symbol"
               name="symbol"
               value={formData.symbol}
-              onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, symbol: e.target.value })
+              }
             />
-            
+
             <button type="submit" className="btn">
               Generate stock opinion
             </button>
@@ -98,7 +103,7 @@ export const StockGenerator: React.FC<any> = () => {
         {chatResponse && (
           <div>
             <h2>this is what we think</h2>
-            {chatResponse.split('**').map((item, index) => (
+            {chatResponse.split("**").map((item, index) => (
               <p key={index}>
                 {item.trim() && <span>&bull; {item.trim()}</span>}
               </p>

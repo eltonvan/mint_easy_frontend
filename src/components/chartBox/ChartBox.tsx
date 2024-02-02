@@ -1,10 +1,8 @@
-// not in use
-// placeholder for further customization
-
 import { Link } from "react-router-dom";
 import "./chartBox.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
+// component of chart used in TickerPanel
 type Props = {
     color: string;
     title: string; // symbol
@@ -35,7 +33,7 @@ const ChartBox = (props: Props) => {
                 />
             <Line
                 type="monotone"
-                dataKey={props.dataKey}
+                dataKey={props.dataKey} // "price"
                 stroke= {props.color}
                 strokeWidth={2}
                 dot={false}

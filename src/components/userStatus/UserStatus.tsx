@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './userStatus.scss';
-import { useAuthStateContext } from '../../contexts/AuthStateContext';
-import { instance, updateCSRFToken } from '../../axiosInstance';
-import { useMutation } from '@tanstack/react-query';
+import React, { useEffect, useState } from "react";
+import "./userStatus.scss";
+import { useAuthStateContext } from "../../contexts/AuthStateContext";
+import { instance, updateCSRFToken } from "../../axiosInstance";
+import { useMutation } from "@tanstack/react-query";
+
+// component of user status used in Trading page
 
 type UserStatusProps = {
   name?: string;
@@ -13,18 +15,20 @@ type UserStatusProps = {
 };
 
 const UserStatus: React.FC<UserStatusProps> = (props) => {
-  const { initialSum = 0, profit_loss = 0 } = props; // Default values to 0 if undefined
+  const { initialSum = 0, profit_loss = 0 } = props; // Default values to 0 if undefined otherwise
   const { userId, username } = useAuthStateContext();
   const [data, setData] = useState({
-    initialSum,
-    currentSum: initialSum - profit_loss,
-    balance: 0,
-    stock_amount: 0,
-    profit_loss: 0,
+    initialSum, // initial investment - 100000$
+    currentSum: initialSum - profit_loss, // calculates the value of the investment
+    balance: 0, // available funds
+    stock_amount: 0, // invested funds
+    profit_loss: 0, // profit/loss
   });
 
   const mutation = useMutation({
+    // React Query mutation
     mutationFn: async () => {
+      // async function
       updateCSRFToken();
       const response = await instance.get(`/data/account-balances/${userId}/`);
 
@@ -40,41 +44,52 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
   });
 
   useEffect(() => {
-    console.log('use effect running');
-    mutation.mutate(); 
+    // will run when the component mounts
+    console.log("use effect running");
+    mutation.mutate();
   }, [mutation]);
 
   const formatNumberWithSeparator = (number: number | undefined): string => {
+    // function to format number with comma separator
     if (number !== undefined) {
       return number.toLocaleString();
     }
-    return '';
+    return "";
   };
 
   const isProfit: boolean = data.profit_loss > 0;
 
   return (
-    <div className='userStatus'>
-      <div className='topRow'>
-        <div className='boxInfo boxName'>
-          <div className='name'>Hello {username}</div>
-          Your investment value is{' '}
-          <div className='number'>{formatNumberWithSeparator(data.currentSum)}$</div>
+    <div className="userStatus">
+      <div className="topRow">
+        <div className="boxInfo boxName">
+          <div className="name">Hello {username}</div>
+          Your investment value is{" "}
+          <div className="number">
+            {formatNumberWithSeparator(data.currentSum)}$
+          </div>
         </div>
       </div>
 
-      <div className='bottomRow'>
-        <div className='boxInfo boxAvailable'>
+      <div className="bottomRow">
+        <div className="boxInfo boxAvailable">
           Your available funds
-          <div className='number'>{formatNumberWithSeparator(data.balance)}$</div>
+          <div className="number">
+            {formatNumberWithSeparator(data.balance)}$
+          </div>
         </div>
-        <div className='boxInfo boxInvested'>
+        <div className="boxInfo boxInvested">
           You invested
-          <div className='number'>{formatNumberWithSeparator(data.stock_amount)}$</div>
+          <div className="number">
+            {formatNumberWithSeparator(data.stock_amount)}$
+          </div>
         </div>
-        <div className={`boxInfo boxProfitLoss ${isProfit ? 'green' : 'red'}`}>
+{/* |        conditional formatting for profit/loss */}
+        <div className={`boxInfo boxProfitLoss ${isProfit ? "green" : "red"}`}>
           Your profit/loss
-          <div className='number'>{formatNumberWithSeparator(data.profit_loss)}$</div>
+          <div className="number">
+            {formatNumberWithSeparator(data.profit_loss)}$
+          </div>
         </div>
       </div>
     </div>

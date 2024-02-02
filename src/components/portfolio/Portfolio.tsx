@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import protobuf from "protobufjs"; 
 import "./portfolio.scss";
 
- 
+ /**
+ * decode the binary data of webstock string, set the current state, and loop through the data
+ */
 
 export const Portfolio: React.FC = () => {
   const [stockData, setStockData] = useState<any[]>([]);

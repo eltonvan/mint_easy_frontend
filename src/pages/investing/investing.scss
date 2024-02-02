@@ -1,6 +1,9 @@
 @import "../../styles/variables.scss";
 @import "../../styles/responsive.scss";
 
+
+
+
 .investing {
   display: grid;
   gap: 20px;
@@ -39,6 +42,17 @@
     background-color: $soft-color;
     color: $dark-color;
     font-weight: 500;
+
+ 
+
+    .dataTable {
+
+    
+      .dataGrid {
+        background-color: $soft-color; // Set your desired background color
+        color: $dark-color; // Set your desired font color
+      }
+    }
 
     .pageTitle {
       color: $dark-color;

@@ -116,3 +116,11 @@ export const StockGenerator: React.FC<any> = () => {
 };
 
 export default StockGenerator;
+=======
+
+export const StockGenerator = () => {
+  return (
+    <div className='stockGenerator'>StockGenerator</div>
+  )
+}
+>>>>>>> from_server

@@ -2,6 +2,7 @@ import "./trading.scss";
 
 import News from "../../components/news/News";
 import UserStatus from "../../components/userStatus/UserStatus";
+<<<<<<< HEAD
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import Slider from "react-slick";

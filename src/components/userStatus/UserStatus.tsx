@@ -7,11 +7,12 @@ import { useMutation } from "@tanstack/react-query";
 // component of user status used in Trading page
 
 type UserStatusProps = {
-  name?: string;
-  user_id?: number;
-  initialSum?: number;
-  profit_loss?: number;
-  balance?: number;
+  name: string;
+  initialSum: number;
+  currentSum: number;
+  availableSum: number;
+  investedSum: number;
+  profitLoss: number;
 };
 
 const UserStatus: React.FC<UserStatusProps> = (props) => {
@@ -57,8 +58,6 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
     return "";
   };
 
-  const isProfit: boolean = data.profit_loss > 0;
-
   return (
     <div className="userStatus">
       <div className="topRow">
@@ -94,6 +93,6 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
       </div>
     </div>
   );
-};
+}
 
 export default UserStatus;

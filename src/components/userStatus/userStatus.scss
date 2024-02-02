@@ -1,6 +1,7 @@
 @import "../../styles/responsive.scss";
 @import "../../styles/variables.scss";
 
+<<<<<<< HEAD
 .userStatus {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
@@ -80,3 +81,13 @@
     }
   }
 }
+=======
+.userStatus{
+
+    h1{
+        color: $dark-color;
+        font-size: clamp(24px, 5vw, 300px);
+    }
+
+}
+>>>>>>> from_server

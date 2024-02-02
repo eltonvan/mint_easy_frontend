@@ -24,4 +24,8 @@ yarn.lock
 *.ntvs*
 *.njsproj
 *.sln
+<<<<<<< HEAD
 *.sw?
+=======
+*.sw?
+>>>>>>> from_server

@@ -1,4 +1,5 @@
 import "./stockGenerator.scss";
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -115,3 +116,11 @@ export const StockGenerator: React.FC = () => {
 };
 
 export default StockGenerator;
+=======
+
+export const StockGenerator = () => {
+  return (
+    <div className='stockGenerator'>StockGenerator</div>
+  )
+}
+>>>>>>> from_server

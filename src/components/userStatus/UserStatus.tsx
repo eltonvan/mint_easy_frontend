@@ -4,32 +4,30 @@ import { useAuthStateContext } from '../../contexts/AuthStateContext';
 import { instance, updateCSRFToken } from '../../axiosInstance';
 import { useMutation } from '@tanstack/react-query';
 
-
-
 type UserStatusProps = {
   name?: string;
   user_id?: number;
   initialSum?: number;
   profit_loss?: number;
+  balance?: number;
 };
 
 const UserStatus: React.FC<UserStatusProps> = (props) => {
-  const {  initialSum, profit_loss } = props;
-  const { userId} = useAuthStateContext();
+  const { initialSum = 0, profit_loss = 0 } = props; // Default values to 0 if undefined
+  const { userId, username } = useAuthStateContext();
   const [data, setData] = useState({
     initialSum,
-    currentSum: initialSum !== undefined && profit_loss !== undefined ? initialSum - profit_loss : 0,
+    currentSum: initialSum - profit_loss,
     balance: 0,
     stock_amount: 0,
     profit_loss: 0,
   });
-  const { username } = useAuthStateContext();
 
   const mutation = useMutation({
     mutationFn: async () => {
       updateCSRFToken();
       const response = await instance.get(`/data/account-balances/${userId}/`);
-  
+
       setData((prevData) => ({
         ...prevData,
         initialSum: 100000,
@@ -43,18 +41,17 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
 
   useEffect(() => {
     console.log('use effect running');
-    mutation.mutate(); // Use mutate method to trigger the mutation
-  }, []);
-
+    mutation.mutate(); 
+  }, [mutation]);
 
   const formatNumberWithSeparator = (number: number | undefined): string => {
     if (number !== undefined) {
       return number.toLocaleString();
     }
-    return "";
+    return '';
   };
 
-      const isProfit: boolean = data.profit_loss > 0;
+  const isProfit: boolean = data.profit_loss > 0;
 
   return (
     <div className='userStatus'>
@@ -63,7 +60,6 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
           <div className='name'>Hello {username}</div>
           Your investment value is{' '}
           <div className='number'>{formatNumberWithSeparator(data.currentSum)}$</div>
-
         </div>
       </div>
 
@@ -71,12 +67,10 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
         <div className='boxInfo boxAvailable'>
           Your available funds
           <div className='number'>{formatNumberWithSeparator(data.balance)}$</div>
-
         </div>
         <div className='boxInfo boxInvested'>
           You invested
           <div className='number'>{formatNumberWithSeparator(data.stock_amount)}$</div>
-
         </div>
         <div className={`boxInfo boxProfitLoss ${isProfit ? 'green' : 'red'}`}>
           Your profit/loss
@@ -88,4 +82,3 @@ const UserStatus: React.FC<UserStatusProps> = (props) => {
 };
 
 export default UserStatus;
-

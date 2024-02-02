@@ -6,17 +6,6 @@ import ChartBox from "../../components/chartBox/ChartBox";
 import "./tickerPanel.scss";
 import { get_stock } from "./util";
 
-// interface StockDataItem {
-//   id: string;
-//   price: number;
-//   changePercent: number;
-// }
-
-// interface ChartDataPoint {
-//   name: string;
-//   revenue: number;
-// }
-
 interface TickerDataItem {
   id: number;
   title: string;

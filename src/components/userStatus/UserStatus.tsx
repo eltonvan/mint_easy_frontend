@@ -1,84 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './userStatus.scss';
 import { useAuthStateContext } from '../../contexts/AuthStateContext';
-import { instance, updateCSRFToken } from '../../axiosInstance';
-import { useMutation } from '@tanstack/react-query';
 
 type UserStatusProps = {
-  name?: string;
-  user_id?: number;
-  initialSum?: number;
-  profit_loss?: number;
-  balance?: number;
+  name: string;
+  initialSum: number;
+  currentSum: number;
+  availableSum: number;
+  investedSum: number;
+  profitLoss: number;
 };
 
-const UserStatus: React.FC<UserStatusProps> = (props) => {
-  const { initialSum = 0, profit_loss = 0 } = props; // Default values to 0 if undefined
-  const { userId, username } = useAuthStateContext();
-  const [data, setData] = useState({
-    initialSum,
-    currentSum: initialSum - profit_loss,
-    balance: 0,
-    stock_amount: 0,
-    profit_loss: 0,
-  });
+const data = {
+  initialSum: 100000,
+  name: 'John Doe',
+  currentSum: 103640.53,
+  investedSum: 64000,
+};
+const isProfit: boolean = data.currentSum >= 100000;
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      updateCSRFToken();
-      const response = await instance.get(`/data/account-balances/${userId}/`);
+data.availableSum = data.currentSum - data.investedSum;
+data.profitLoss = data.currentSum - data.initialSum;
 
-      setData((prevData) => ({
-        ...prevData,
-        initialSum: 100000,
-        currentSum: prevData.initialSum + response.data.profit_loss,
-        balance: response.data.balance,
-        stock_amount: response.data.stock_amount,
-        profit_loss: response.data.profit_loss,
-      }));
-    },
-  });
-
-  useEffect(() => {
-    console.log('use effect running');
-    mutation.mutate(); 
-  }, [mutation]);
-
-  const formatNumberWithSeparator = (number: number | undefined): string => {
-    if (number !== undefined) {
-      return number.toLocaleString();
-    }
-    return '';
+const UserStatus = (props: UserStatusProps) => {
+  const{username} = useAuthStateContext();
+  const formatNumberWithSeparator = (number: number): string => {
+    return number.toLocaleString();
   };
-
-  const isProfit: boolean = data.profit_loss > 0;
 
   return (
     <div className='userStatus'>
       <div className='topRow'>
         <div className='boxInfo boxName'>
-          <div className='name'>Hello {username}</div>
-          Your investment value is{' '}
-          <div className='number'>{formatNumberWithSeparator(data.currentSum)}$</div>
+          <div className='name'>
+            Hello {username}
+          </div>  
+          Your investment value is <div className='number'>{formatNumberWithSeparator(data.currentSum)}$</div> 
         </div>
       </div>
 
       <div className='bottomRow'>
         <div className='boxInfo boxAvailable'>
           Your available funds
-          <div className='number'>{formatNumberWithSeparator(data.balance)}$</div>
+          <div className='number'>{formatNumberWithSeparator(data.availableSum)}$</div>
         </div>
         <div className='boxInfo boxInvested'>
-          You invested
-          <div className='number'>{formatNumberWithSeparator(data.stock_amount)}$</div>
+          You invested 
+          <div className='number'>{formatNumberWithSeparator(data.investedSum)}$</div>
         </div>
         <div className={`boxInfo boxProfitLoss ${isProfit ? 'green' : 'red'}`}>
-          Your profit/loss
-          <div className='number'>{formatNumberWithSeparator(data.profit_loss)}$</div>
-        </div>
+    Your profit/loss
+    <div className='number'>{formatNumberWithSeparator(data.profitLoss)}$</div>
+  </div>
       </div>
     </div>
   );
-};
+}
 
 export default UserStatus;

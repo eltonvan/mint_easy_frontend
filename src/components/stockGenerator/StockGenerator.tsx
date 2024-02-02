@@ -1,5 +1,6 @@
 // Import necessary libraries and styles
 import "./stockGenerator.scss";
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import instance from "../../axiosInstance";
 import { useMutation } from '@tanstack/react-query';
@@ -111,3 +112,11 @@ export const StockGenerator: React.FC<any> = () => {
 };
 
 export default StockGenerator;
+=======
+
+export const StockGenerator = () => {
+  return (
+    <div className='stockGenerator'>StockGenerator</div>
+  )
+}
+>>>>>>> from_server

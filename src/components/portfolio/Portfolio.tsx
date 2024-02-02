@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useRef } from "react";
 import protobuf from "protobufjs"; 
 import "./portfolio.scss";
@@ -76,3 +77,12 @@ export const Portfolio: React.FC = () => {
     </div>
   );
 };
+=======
+import "./portfolio.scss";
+
+export const Portfolio = () => {
+  return (
+    <div className='portfolio'>Portfolio</div>
+  )
+}
+>>>>>>> from_server

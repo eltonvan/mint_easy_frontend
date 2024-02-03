@@ -4,13 +4,14 @@
 body,
 html {
   margin: 0;
-  padding: 0;
+  padding:0;
   background-color: $main-bg; // Set the background color to match your design
 }
 
 * {
   margin: 0;
-  padding: 0;
+  padding:0 0 5px 0;
+
   box-sizing: border-box;
 }
 
@@ -26,6 +27,7 @@ a {
   min-height: 100vh; // Set minimum height to 100% of the viewport height
   display: flex; // Use flexbox to control vertical alignment
   flex-direction: column;
+  padding-right: 20px;
 }
 
 .container {

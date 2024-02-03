@@ -27,7 +27,8 @@ const TextBox = (props: Props) => {
       <div className="pageSubtitle">
         <h1>{props.pageSubtitle}</h1>
       </div>
-      <div className="pageText">{props.pageText}</div>
+      <div className="pageText" dangerouslySetInnerHTML={{ __html: props.pageText.replace(/\n/g, '<br />') }}></div>
+
       <div className="btnPanel">
         <Link to="/invest">
           <div className="btn">I want to invest</div>

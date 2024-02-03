@@ -55,7 +55,7 @@ const Navbar = () => {
     <div className="navbar">
       {msg && <div className="msg">{msg}</div>}
       <div className="logo">
-        <img src="logo11.svg" alt="" />
+        <img src="easy.svg" alt="" />
       </div>
       <div className="icons">
         <img src="/search.svg" alt="" className="icon" />

@@ -21,7 +21,7 @@
   }
   .box {
     padding: 20px;
-    border: 1px solid $soft-bg;
+    // border: 1px solid $soft-bg;
     border-radius: 10px;
   }
 
@@ -32,12 +32,14 @@
 
   .box2 {
     grid-column: span 4;
-    grid-row: span 3;
+    grid-row: span 2;
 
     background-color: $soft-color;
 
     display: grid;
     grid-template-rows: auto auto auto auto;
+   
+    
 
     .pageTitle {
       color: $dark-color;
@@ -46,13 +48,14 @@
 
     .pageSubtitle {
       color: $cooler-color;
-      font-size: clamp(16px, 5vw, 22px);
+      font-size: clamp(12px, 4vw, 18px);
       margin-bottom: 20px;
     }
 
     .pageText {
       color: $dark-color;
-      font-size: clamp(12px, 5vw, 24px);
+      font-size: clamp(12px, 5vw, 18px);
+      line-height: 1.5;
     }
 
     .btnPanel {
@@ -61,6 +64,10 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 20px;
+      padding-bottom: 10px;
+      padding-top: 30;
+      padding-left: 10;
+      padding-right: 10;
 
       @include md {
         flex-direction: column;
@@ -73,15 +80,18 @@
       }
 
       .btn {
-        margin-top: 80px;
-        background-color: $dark-color;
+        text-transform: uppercase;
+        margin-top: 20px;
+        background: linear-gradient(to right, $soft-bg, $cooler-color);
         color: $soft-color;
-        padding: 50px 80px;
+        padding: 30px 80px;
         border-radius: 10px;
-        font-size: 26px;
-        font-weight: 600;
+        font-size: 17px;
+        font-weight: 800;
         cursor: pointer;
-        transition: all 0.3s ease-in-out;
+        //transition: all 0.2s ease-in-out;
+        letter-spacing: 1.5px;
+
 
         @include md {
           margin-top: 40px;
@@ -94,9 +104,10 @@
         }
 
         &:hover {
-          background-color: $soft-color;
-          color: $dark-color;
-          border: 5px solid $dark-color;
+          background: $soft-color;
+          color: $text-btn-hover;
+          box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
+          //border: 1px solid $soft-bg;
         }
       }
     }

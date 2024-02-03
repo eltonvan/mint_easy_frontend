@@ -287,7 +287,7 @@ export const StockOrder: React.FC<StockOrderProps> = (props) => {
             </div>
           </div>
 
-          <button type="submit">Order</button>
+          <button type="submit" className="orderBtn">Order</button>
         </form>
       </div>
     </div>

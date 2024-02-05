@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import instance from "../../axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import { updateCSRFToken } from "../../axiosInstance";
+import ReactLoading from 'react-loading';
 
 type StockItemData = {
   symbol: string;
@@ -51,17 +52,23 @@ export const StockGenerator: React.FC<any> = () => {
       }
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
+  console.log("isLoading", isLoading);
 
   // Function to handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setErrors({ symbol: null });
+    setIsLoading(true); // Start loading
+
 
     try {
-      await mutation.mutateAsync(); // execution is paused until the promise is resolved
+      await mutation.mutateAsync(); // wait for promise to resolve
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -74,6 +81,8 @@ export const StockGenerator: React.FC<any> = () => {
   return (
     <div className="stockGenerator">
       <div>
+      {mutation.isPending && <ReactLoading type="bars" color="#6ae9ea" />}
+
         <form onSubmit={handleSubmit}>
           <div className="item">
             <label htmlFor="symbol">Enter stock symbol</label>
@@ -97,6 +106,8 @@ export const StockGenerator: React.FC<any> = () => {
 
             {errors.symbol && <div className="error">{errors.symbol}</div>}
           </div>
+
+          
         </form>
 
         {/* Display result from the server */}

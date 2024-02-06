@@ -3,7 +3,7 @@ FROM node:latest as builder
 
 # Set working directory
 WORKDIR /app
-a
+
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 

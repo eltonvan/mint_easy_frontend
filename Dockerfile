@@ -3,7 +3,7 @@ FROM node:latest as builder
 
 # Set working directory
 WORKDIR /app
-
+a
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
@@ -24,9 +24,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy the custom Nginx configuration file
 COPY default.conf /etc/nginx/conf.d/default.conf
-
-# Change the ownership of the /etc/letsencrypt directory to the nginx user
-RUN chown -R nginx:nginx /etc/letsencrypt
 
 # Expose ports
 EXPOSE 80

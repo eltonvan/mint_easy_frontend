@@ -1,4 +1,14 @@
-# Frontend mint easy
+# MINT EASY (frontend)
+
+## Project Description
+Minteasy is a web application that allows users to simulate stock trading. Users can create an account, deposit money, and buy and sell stocks. they get a real time analysis using ai and financial models analysis  The application uses real-time stock data to simulate the stock market. Users can also view their transaction history and portfolio.
+
+this is the frontend of the application
+
+## Technologies
+- react
+- scss
+- typescript
 
 ## Project setup
 
